@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vela — Memory, Restored</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --violet:       #6B5AE0;
+      --lavender:     #A695F5;
+      --sand:         #F5F0E8;
+      --deep-plum:    #2B2340;
+      --warm-white:   #FAF8F4;
+      --sand-mid:     #E8E0D4;
+      --muted-violet: #8B7FA8;
+      --mid-plum:     #3D3560;
+      --v50:          #EEEBFB;
+      --v100:         #D4CEFF;
+      --v700:         #4F40B8;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--sand);
+      color: var(--deep-plum);
+      overflow-x: hidden;
+    }
+
+    /* ─── UTILITY ────────────────────────────────────────── */
+    .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--lavender);
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up:nth-child(2) { transition-delay: 0.1s; }
+    .fade-up:nth-child(3) { transition-delay: 0.2s; }
+    .fade-up:nth-child(4) { transition-delay: 0.3s; }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 56px;
+      height: 68px;
+      background: rgba(245, 240, 232, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-bottom-color: var(--sand-mid); }
+
+    .nav-logo {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--deep-plum);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 40px; list-style: none;
+    }
+    .nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--muted-violet);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--deep-plum); }
+
+    /* ─── NAV INLINE FORM ───────────────────────────────── */
+    .nav-form {
+      display: flex; align-items: center;
+      gap: 0;
+      border: 1.5px solid var(--sand-mid);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .nav-form:focus-within { border-color: var(--violet); }
+
+    .nav-input {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: var(--deep-plum);
+      background: transparent;
+      border: none; outline: none;
+      padding: 8px 14px;
+      width: 200px;
+      transition: width 0.3s ease;
+    }
+    .nav-input::placeholder { color: var(--muted-violet); }
+    .nav-input:focus { width: 230px; }
+
+    .nav-submit {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: var(--warm-white);
+      background: var(--violet);
+      border: none;
+      padding: 9px 16px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .nav-submit:hover { background: var(--v700); }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 100px 56px 80px;
+      gap: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -160px; right: -240px;
+      width: 780px; height: 780px;
+      background: radial-gradient(circle, var(--v50) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 180px;
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-eyebrow { margin-bottom: 36px; }
+
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(72px, 7.5vw, 112px);
+      line-height: 0.95;
+      color: var(--deep-plum);
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--mid-plum);
+    }
+
+    .hero-body {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--muted-violet);
+      max-width: 420px;
+      margin-bottom: 40px;
+    }
+
+    /* ─── HERO INLINE FORM ───────────────────────────────── */
+    .hero-form {
+      display: flex;
+      gap: 0;
+      max-width: 440px;
+      border: 1.5px solid var(--sand-mid);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .hero-form:focus-within {
+      border-color: var(--violet);
+      box-shadow: 0 0 0 3px rgba(107,90,224,0.1);
+    }
+
+    .hero-input {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: var(--deep-plum);
+      background: var(--warm-white);
+      border: none; outline: none;
+      padding: 14px 18px;
+      flex: 1;
+      min-width: 0;
+    }
+    .hero-input::placeholder { color: var(--muted-violet); }
+
+    .hero-submit {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--warm-white);
+      background: var(--violet);
+      border: none;
+      padding: 14px 24px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .hero-submit:hover { background: var(--v700); }
+
+    .hero-success {
+      display: none;
+      font-size: 14px;
+      color: var(--violet);
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .hero-note {
+      font-size: 12px;
+      color: var(--muted-violet);
+      opacity: 0.75;
+      margin-bottom: 28px;
+    }
+
+    .btn-ghost {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--muted-violet);
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: color 0.2s;
+    }
+    .btn-ghost::after { content: '→'; transition: transform 0.2s; }
+    .btn-ghost:hover { color: var(--deep-plum); }
+    .btn-ghost:hover::after { transform: translateX(4px); }
+
+    /* ─── HERO VISUAL ────────────────────────────────────── */
+    .hero-visual {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; justify-content: center;
+      height: 480px;
+    }
+
+    .glasses-silhouette {
+      position: absolute;
+      width: 88%; opacity: 0.07;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .card-recognition {
+      position: absolute;
+      bottom: 24px; right: 0;
+      width: 248px;
+      background: var(--deep-plum);
+      border-radius: 4px;
+      padding: 22px 24px;
+      box-shadow: 0 32px 80px rgba(43, 35, 64, 0.28), 0 0 0 1px rgba(255,255,255,0.06);
+      animation: float 5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    .rec-eyebrow {
+      display: flex; align-items: center; gap: 8px;
+      color: var(--lavender);
+      font-size: 10px; letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .rec-dot {
+      width: 6px; height: 6px;
+      background: var(--lavender);
+      border-radius: 50%;
+      animation: blink 1.8s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+    .rec-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 52px;
+      color: var(--warm-white);
+      line-height: 1;
+      margin-bottom: 4px;
+      transition: opacity 0.35s;
+    }
+    .rec-relation {
+      font-size: 14px;
+      color: var(--lavender);
+      margin-bottom: 18px;
+      transition: opacity 0.35s;
+    }
+    .rec-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+      margin-bottom: 14px;
+    }
+    .rec-time {
+      font-size: 12px;
+      color: var(--muted-violet);
+    }
+
+    .card-context {
+      position: absolute;
+      top: 28px; left: 0;
+      width: 210px;
+      background: var(--warm-white);
+      border-radius: 4px;
+      padding: 18px 20px;
+      border: 1px solid var(--sand-mid);
+      box-shadow: 0 12px 40px rgba(43, 35, 64, 0.07);
+      animation: float 5s ease-in-out infinite;
+      animation-delay: -2.5s;
+    }
+    .ctx-label {
+      font-size: 10px; letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted-violet);
+      margin-bottom: 10px;
+    }
+    .ctx-text {
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--deep-plum);
+      line-height: 1.55;
+    }
+    .ctx-text strong { color: var(--violet); font-weight: 500; }
+
+    /* ─── PROBLEM ─────────────────────────────────────────── */
+    .problem {
+      padding: 128px 56px;
+      background: var(--warm-white);
+      border-top: 1px solid var(--sand-mid);
+      border-bottom: 1px solid var(--sand-mid);
+    }
+    .problem-inner {
+      max-width: 860px; margin: 0 auto; text-align: center;
+    }
+    .problem .eyebrow { margin-bottom: 36px; }
+
+    .stat-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(48px, 6vw, 86px);
+      line-height: 1.05;
+      color: var(--deep-plum);
+      margin-bottom: 32px;
+    }
+    .stat-headline .num { color: var(--violet); }
+
+    .problem-body {
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--muted-violet);
+      max-width: 560px;
+      margin: 0 auto 44px;
+    }
+
+    .tag-pill {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--mid-plum);
+      padding: 14px 28px;
+      border: 1.5px solid var(--sand-mid);
+      border-radius: 2px;
+      background: transparent;
+    }
+
+    /* ─── HOW IT WORKS ────────────────────────────────────── */
+    .how { padding: 128px 56px; }
+    .how-inner { max-width: 1160px; margin: 0 auto; }
+    .how .eyebrow { text-align: center; margin-bottom: 24px; }
+
+    .how-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(38px, 4.5vw, 58px);
+      color: var(--deep-plum);
+      text-align: center;
+      margin-bottom: 80px;
+      line-height: 1.15;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--sand-mid);
+      background: var(--sand-mid);
+      gap: 1px;
+    }
+    .step {
+      background: var(--sand);
+      padding: 56px 44px 52px;
+    }
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 88px;
+      color: var(--v100);
+      line-height: 1;
+      margin-bottom: 28px;
+      display: block;
+    }
+    .step-title {
+      font-weight: 500;
+      font-size: 17px;
+      color: var(--deep-plum);
+      margin-bottom: 14px;
+    }
+    .step-desc {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--muted-violet);
+    }
+
+    /* ─── FEATURES ────────────────────────────────────────── */
+    .features {
+      padding: 128px 56px;
+      background: var(--deep-plum);
+    }
+    .features-inner { max-width: 1160px; margin: 0 auto; }
+    .features .eyebrow { margin-bottom: 24px; }
+
+    .features-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(42px, 5vw, 72px);
+      color: var(--warm-white);
+      line-height: 1.1;
+      margin-bottom: 80px;
+      max-width: 560px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .feat {
+      background: var(--deep-plum);
+      padding: 48px 44px;
+      transition: background 0.25s;
+    }
+    .feat:hover { background: var(--mid-plum); }
+
+    .feat-icon {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: rgba(166,149,245,0.12);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 24px;
+    }
+    .feat-icon svg { width: 18px; height: 18px; stroke: var(--lavender); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    .feat-title {
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--warm-white);
+      margin-bottom: 12px;
+    }
+    .feat-desc {
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--muted-violet);
+    }
+
+    /* ─── TESTIMONIAL ─────────────────────────────────────── */
+    .testimonial {
+      padding: 128px 56px;
+      text-align: center;
+    }
+    .testimonial-inner {
+      max-width: 760px; margin: 0 auto;
+    }
+    .quote-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 120px;
+      color: var(--v100);
+      line-height: 0.6;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(26px, 3.5vw, 44px);
+      color: var(--deep-plum);
+      line-height: 1.45;
+      margin-bottom: 40px;
+    }
+    .quote-attr {
+      font-size: 13px;
+      color: var(--muted-violet);
+      letter-spacing: 0.03em;
+    }
+    .quote-attr strong {
+      color: var(--mid-plum);
+      font-weight: 500;
+    }
+
+    /* ─── CTA ─────────────────────────────────────────────── */
+    .cta-section {
+      padding: 128px 56px;
+      background: var(--deep-plum);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 680px; height: 680px;
+      background: radial-gradient(circle, rgba(107,90,224,0.18) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .cta-section .eyebrow { margin-bottom: 32px; }
+
+    .cta-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(52px, 6.5vw, 96px);
+      color: var(--warm-white);
+      line-height: 0.95;
+      margin-bottom: 24px;
+      position: relative; z-index: 1;
+    }
+    .cta-body {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--muted-violet);
+      max-width: 440px;
+      margin: 0 auto 52px;
+      position: relative; z-index: 1;
+    }
+
+    .waitlist-form {
+      display: flex; gap: 10px;
+      max-width: 420px;
+      margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .waitlist-input {
+      flex: 1;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.06);
+      border: 1.5px solid rgba(166,149,245,0.25);
+      border-radius: 2px;
+      color: var(--warm-white);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .waitlist-input::placeholder { color: var(--muted-violet); }
+    .waitlist-input:focus { border-color: var(--lavender); }
+
+    .waitlist-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      padding: 14px 26px;
+      background: var(--violet);
+      color: var(--warm-white);
+      border: none; border-radius: 2px;
+      cursor: pointer; white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .waitlist-btn:hover { background: var(--lavender); color: var(--deep-plum); }
+
+    .cta-note {
+      font-size: 12px;
+      color: var(--muted-violet);
+      margin-top: 18px;
+      opacity: 0.65;
+      position: relative; z-index: 1;
+    }
+
+    .waitlist-success {
+      display: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: var(--lavender);
+      position: relative; z-index: 1;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    footer {
+      padding: 44px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--sand-mid);
+    }
+
+    .footer-brand .f-name {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--deep-plum);
+    }
+    .footer-brand .f-sub {
+      font-size: 12px;
+      color: var(--muted-violet);
+      margin-top: 4px;
+    }
+
+    .footer-links {
+      display: flex; gap: 32px; list-style: none;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--muted-violet);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--deep-plum); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--muted-violet);
+      opacity: 0.6;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 960px) {
+      nav { padding: 0 28px; }
+      .nav-links { display: none; }
+      .nav-form { display: none; }
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 100px 28px 72px;
+        gap: 48px;
+      }
+      .hero-visual { height: 300px; }
+      .problem, .how, .testimonial, .cta-section, .features { padding: 80px 28px; }
+      .steps { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      footer {
+        flex-direction: column;
+        gap: 24px;
+        text-align: center;
+        padding: 36px 28px;
+      }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ─────────────────────────────────────────────── -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">Vela</a>
+    <ul class="nav-links">
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <form class="nav-form" id="navForm" onsubmit="submitNav(event)">
+      <input type="email" class="nav-input" placeholder="your@email.com" required>
+      <button type="submit" class="nav-submit">Join Waitlist</button>
+    </form>
+  </nav>
+
+  <!-- ── HERO ────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="eyebrow hero-eyebrow">Assistive Technology &nbsp;·&nbsp; Memory Care &nbsp;·&nbsp; D-Vision</p>
+      <h1 class="hero-headline">Memory,<br><em>restored.</em></h1>
+      <p class="hero-body">Smart glasses that display names and relationships in real time — a passive, always-on memory aid for early-to-mid stage dementia patients.</p>
+
+      <form class="hero-form" id="heroForm" onsubmit="submitHero(event)">
+        <input type="email" class="hero-input" placeholder="your@email.com" required>
+        <button type="submit" class="hero-submit">Join Waitlist</button>
+      </form>
+      <p class="hero-success" id="heroSuccess">You're on the list — we'll be in touch soon.</p>
+      <p class="hero-note">No spam. We'll reach out when you're next in line.</p>
+      <a href="#how" class="btn-ghost">See how it works</a>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <svg class="glasses-silhouette" viewBox="0 0 480 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="120" cy="80" rx="100" ry="72" stroke="#2B2340" stroke-width="6"/>
+        <ellipse cx="360" cy="80" rx="100" ry="72" stroke="#2B2340" stroke-width="6"/>
+        <path d="M220 80 C240 60, 260 60, 260 80" stroke="#2B2340" stroke-width="6" fill="none"/>
+        <line x1="20" y1="50" x2="0" y2="40" stroke="#2B2340" stroke-width="5" stroke-linecap="round"/>
+        <line x1="460" y1="50" x2="480" y2="40" stroke="#2B2340" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+
+      <div class="card-context">
+        <div class="ctx-label">Contextual Recall</div>
+        <div class="ctx-text">Visits every <strong>Sunday</strong>. Loves gardening and early mornings.</div>
+      </div>
+
+      <div class="card-recognition">
+        <div class="rec-eyebrow">
+          <div class="rec-dot"></div>
+          Recognition Active
+        </div>
+        <div class="rec-name" id="recName">Sarah</div>
+        <div class="rec-relation" id="recRelation">Your daughter</div>
+        <div class="rec-divider"></div>
+        <div class="rec-time" id="recTime">Recognized &nbsp;·&nbsp; 2 sec ago</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROBLEM ──────────────────────────────────────────── -->
+  <section class="problem">
+    <div class="problem-inner">
+      <p class="eyebrow fade-up">The Problem</p>
+      <h2 class="stat-headline fade-up">
+        <span class="num">7.2 million</span><br>
+        Americans can't<br>recognize the faces<br>of people they love.
+      </h2>
+      <p class="problem-body fade-up">Dementia robs patients of the most fundamental human experience — knowing who is in the room with them. The fear, confusion, and heartbreak this causes is both profound and preventable.</p>
+      <span class="tag-pill fade-up">No existing product solves this. Until now.</span>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ─────────────────────────────────────── -->
+  <section id="how" class="how">
+    <div class="how-inner">
+      <p class="eyebrow">How It Works</p>
+      <h2 class="how-headline">See who's there.<br>Always.</h2>
+      <div class="steps">
+        <div class="step fade-up">
+          <span class="step-num">01</span>
+          <h3 class="step-title">Passive Recognition</h3>
+          <p class="step-desc">D-Vision glasses scan faces in real time using edge-based AI — no cloud delay, no privacy compromise. Recognition happens in under two seconds.</p>
+        </div>
+        <div class="step fade-up">
+          <span class="step-num">02</span>
+          <h3 class="step-title">Contextual Display</h3>
+          <p class="step-desc">A subtle HUD shows the person's name, their relationship, and a warm memory prompt — enough to restore confidence, nothing that overwhelms.</p>
+        </div>
+        <div class="step fade-up">
+          <span class="step-num">03</span>
+          <h3 class="step-title">Audio Guidance</h3>
+          <p class="step-desc">Optional discreet audio cues provide spoken guidance, helping patients engage naturally — even when looking away from the display.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FEATURES ─────────────────────────────────────────── -->
+  <section id="features" class="features">
+    <div class="features-inner">
+      <p class="eyebrow">Built for Real Life</p>
+      <h2 class="features-headline">Technology that disappears into care.</h2>
+      <div class="features-grid">
+
+        <div class="feat fade-up">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M2 20c0-4 4.5-7 10-7s10 3 10 7"/></svg>
+          </div>
+          <h3 class="feat-title">Real-Time Face Recognition</h3>
+          <p class="feat-desc">On-device AI identifies familiar faces in under 2 seconds, even in low light or partial occlusion. No internet required.</p>
+        </div>
+
+        <div class="feat fade-up">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3 class="feat-title">Privacy-First Architecture</h3>
+          <p class="feat-desc">All recognition happens on-device. No faces, names, or memories are ever transmitted to external servers — ever.</p>
+        </div>
+
+        <div class="feat fade-up">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3 class="feat-title">Caregiver Family App</h3>
+          <p class="feat-desc">Family members add themselves, upload photos, and write memory prompts — building a recognition library with love.</p>
+        </div>
+
+        <div class="feat fade-up">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3 class="feat-title">All-Day Wearability</h3>
+          <p class="feat-desc">Designed to look like standard eyewear. 14-hour battery. Lightweight enough that patients forget they're wearing them.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIAL ──────────────────────────────────────── -->
+  <section class="testimonial">
+    <div class="testimonial-inner fade-up">
+      <span class="quote-mark">&ldquo;</span>
+      <blockquote class="quote-text">
+        The moment my mother looked at me and said my name — for the first time in months — I understood what Vela means.
+      </blockquote>
+      <p class="quote-attr">
+        <strong>Maria T.</strong> &nbsp;&middot;&nbsp; Daughter of an early-stage Alzheimer's patient, Dallas–Fort Worth
+      </p>
+    </div>
+  </section>
+
+  <!-- ── CTA ─────────────────────────────────────────────── -->
+  <section id="waitlist" class="cta-section">
+    <p class="eyebrow cta-eyebrow">Early Access</p>
+    <h2 class="cta-headline">Be first to<br><em style="font-style:italic; color: var(--lavender);">restore</em> memory.</h2>
+    <p class="cta-body">Launching in limited markets across Dallas–Fort Worth. Join the waitlist to get early access and help shape the product.</p>
+
+    <form class="waitlist-form" id="waitlistForm" onsubmit="submitWaitlist(event)">
+      <input type="email" class="waitlist-input" placeholder="your@email.com" required>
+      <button type="submit" class="waitlist-btn">Join Waitlist</button>
+    </form>
+    <p class="waitlist-success" id="waitlistSuccess">You're on the list. We'll be in touch soon.</p>
+    <p class="cta-note">Launching in Dallas–Fort Worth. No spam, no obligations.</p>
+  </section>
+
+  <!-- ── FOOTER ───────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-brand">
+      <div class="f-name">Vela</div>
+      <div class="f-sub">D-Vision &nbsp;·&nbsp; Memory Care Technology</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Press</a></li>
+    </ul>
+    <div class="footer-copy">&copy; 2026 Vela Technologies, Inc.</div>
+  </footer>
+
+  <script>
+    // ── Nav scroll state ──────────────────────────────────
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // ── Scroll-triggered fade-up ──────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ── Recognition card cycling ──────────────────────────
+    const people = [
+      { name: 'Sarah',  relation: 'Your daughter' },
+      { name: 'David',  relation: 'Your son'       },
+      { name: 'Helen',  relation: 'Your sister'    },
+      { name: 'Marcus', relation: 'Your caregiver' },
+    ];
+    let personIdx = 0;
+    const nameEl     = document.getElementById('recName');
+    const relationEl = document.getElementById('recRelation');
+    const timeEl     = document.getElementById('recTime');
+
+    nameEl.style.transition     = 'opacity 0.35s';
+    relationEl.style.transition = 'opacity 0.35s';
+
+    function cycleRecognition() {
+      personIdx = (personIdx + 1) % people.length;
+      nameEl.style.opacity     = '0';
+      relationEl.style.opacity = '0';
+      setTimeout(() => {
+        nameEl.textContent     = people[personIdx].name;
+        relationEl.textContent = people[personIdx].relation;
+        timeEl.textContent     = 'Recognized \u00a0·\u00a0 just now';
+        nameEl.style.opacity     = '1';
+        relationEl.style.opacity = '1';
+      }, 380);
+      setTimeout(() => {
+        timeEl.textContent = 'Recognized \u00a0·\u00a0 2 sec ago';
+      }, 2000);
+    }
+    setInterval(cycleRecognition, 4200);
+
+    // ── Form submissions ─────────────────────────────────
+    function submitHero(e) {
+      e.preventDefault();
+      document.getElementById('heroForm').style.display    = 'none';
+      document.getElementById('heroSuccess').style.display = 'block';
+      markAllSubmitted();
+    }
+
+    function submitNav(e) {
+      e.preventDefault();
+      const form = document.getElementById('navForm');
+      form.innerHTML = '<span style="font-size:13px;color:var(--violet);padding:0 12px;font-family:\'DM Sans\',sans-serif;">You\'re on the list ✓</span>';
+      markAllSubmitted();
+    }
+
+    function submitWaitlist(e) {
+      e.preventDefault();
+      document.getElementById('waitlistForm').style.display    = 'none';
+      document.getElementById('waitlistSuccess').style.display = 'block';
+      markAllSubmitted();
+    }
+
+    function markAllSubmitted() {
+      ['heroForm', 'waitlistForm'].forEach(id => {
+        const f = document.getElementById(id);
+        if (f) f.querySelectorAll('input,button').forEach(el => el.disabled = true);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -319,16 +319,16 @@
 
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 16px 6px 8px;
+      padding: 10px 24px 10px 14px;
       border-radius: var(--r-pill);
       background: rgba(107,90,224,0.1);
       border: 1px solid rgba(107,90,224,0.15);
-      font-size: 11px; font-weight: 500;
+      font-size: 15px; font-weight: 500;
       color: var(--lavender);
       margin-bottom: 44px;
     }
     .badge-dot {
-      width: 6px; height: 6px; border-radius: 50%;
+      width: 8px; height: 8px; border-radius: 50%;
       background: #4ADE80;
       box-shadow: 0 0 8px rgba(74,222,128,0.5);
       animation: pulse 2s ease-in-out infinite;
@@ -600,12 +600,9 @@
       top: 15%;
       left: 50%; transform: translateX(-50%);
       text-align: center;
-      opacity: 0;
-      transition: opacity .8s;
       pointer-events: none;
       z-index: 5;
     }
-    .gs-tagline.visible { opacity: 1; }
     .gs-tagline-text {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
@@ -931,55 +928,6 @@
     .step h3 { font-weight: 500; font-size: 17px; color: var(--warm-white); margin-bottom: 12px; }
     .step p { font-size: 13px; line-height: 1.8; color: var(--muted); }
 
-    /* ── FEATURES ─────────────────────────────────────── */
-    .features { padding: 160px 48px; }
-    .features-inner { max-width: 1200px; margin: 0 auto; }
-    .features-top { margin-bottom: 72px; }
-    .features-top .eyebrow { margin-bottom: 20px; }
-    .features-top h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(36px, 4.5vw, 60px);
-      color: var(--warm-white); line-height: 1.1;
-      max-width: 480px;
-    }
-    .feat-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .feat {
-      background: rgba(12,10,22,0.7);
-      border: 1px solid rgba(166,149,245,0.07);
-      border-radius: var(--r-card);
-      padding: 40px 36px;
-      transition: all .4s cubic-bezier(.16,1,.3,1);
-      position: relative; overflow: hidden;
-    }
-    .feat::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1.5px;
-      background: linear-gradient(90deg, transparent, var(--violet), var(--lavender), transparent);
-      opacity: 0; transition: opacity .4s;
-    }
-    .feat:hover {
-      transform: translateY(-4px);
-      border-color: rgba(166,149,245,0.2);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-    }
-    .feat:hover::after { opacity: 1; }
-    .feat-icon {
-      width: 44px; height: 44px;
-      border-radius: var(--r-card);
-      background: linear-gradient(135deg, rgba(107,90,224,0.15), rgba(166,149,245,0.08));
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 24px;
-    }
-    .feat-icon svg { width: 20px; height: 20px; stroke: var(--lavender); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-    .feat h3 { font-weight: 500; font-size: 16px; color: var(--warm-white); margin-bottom: 10px; }
-    .feat p { font-size: 14px; line-height: 1.8; color: var(--muted); }
 
     /* ── TESTIMONIAL ──────────────────────────────────── */
     .testimonial { padding: 160px 48px; position: relative; }
@@ -1179,7 +1127,7 @@
     <a href="#" class="nav-logo"><img src="assets/logo-reversed.svg" alt="Vela Vision" height="30"></a>
     <ul class="nav-links">
       <li><a href="#how">How It Works</a></li>
-      <li><a href="#features">Features</a></li>
+
       <li><a href="#team">Team</a></li>
     </ul>
     <a href="#waitlist" class="nav-cta">Join Waitlist</a>
@@ -1281,8 +1229,8 @@
 
       <!-- Tagline -->
       <div class="gs-tagline" id="gsTagline">
-        <div class="gs-tagline-text">Faces remembered. Connections preserved.</div>
-        <div class="gs-tagline-sub">Smart glasses designed for memory care</div>
+        <div class="gs-tagline-text r">Faces remembered. Connections preserved.</div>
+        <div class="gs-tagline-sub r d1">Smart glasses designed for memory care</div>
       </div>
 
       <div class="glasses-stage" id="glassesStage">
@@ -1450,42 +1398,6 @@
 
   <div class="divider"></div>
 
-  <!-- FEATURES -->
-  <section id="features" class="features" style="position:relative;">
-    <div class="section-orb" style="width:300px;height:300px;background:var(--v700);top:20%;right:-3%;" aria-hidden="true"></div>
-    <div class="section-dot" style="top:10%;left:18%;animation-delay:-4s;" aria-hidden="true"></div>
-    <div class="section-dot" style="bottom:18%;right:8%;animation-delay:-6s;width:4px;height:4px;" aria-hidden="true"></div>
-    <div class="features-inner">
-      <div class="features-top">
-        <p class="eyebrow r">Built for Real Life</p>
-        <h2 class="r d1">Technology that disappears into care.</h2>
-      </div>
-      <div class="feat-grid">
-        <div class="feat r">
-          <div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M2 20c0-4 4.5-7 10-7s10 3 10 7"/></svg></div>
-          <h3>Real-Time Face Recognition</h3>
-          <p>On-device recognition identifies familiar faces in under 2 seconds, even in low light. No internet required.</p>
-        </div>
-        <div class="feat r d1">
-          <div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-          <h3>Privacy-First Architecture</h3>
-          <p>All recognition happens on-device. No faces, names, or memories are ever transmitted to external servers.</p>
-        </div>
-        <div class="feat r d2">
-          <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
-          <h3>Caregiver Family App</h3>
-          <p>Family members add themselves, upload photos, and write memory prompts — building a recognition library with love.</p>
-        </div>
-        <div class="feat r d3">
-          <div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-          <h3>All-Day Wearability</h3>
-          <p>Designed to look like standard eyewear. 14-hour battery. At just 40g, patients forget they're wearing them.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
 
   <!-- TESTIMONIAL -->
   <section class="testimonial" style="position:relative;">
@@ -1719,8 +1631,22 @@
     // ── Form
     function submitWL(e) {
       e.preventDefault();
-      document.getElementById('wlForm').style.display = 'none';
-      document.getElementById('wlSuccess').style.display = 'block';
+      var form = document.getElementById('wlForm');
+      var btn = form.querySelector('.wl-btn');
+      var email = form.querySelector('.wl-input').value;
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+      fetch('https://script.google.com/macros/s/AKfycbxNfSkdyonzzW8z5VvOFUy_vPdJLmZw0Z4zN5SQGpiiM8AjgUjk9D3WOw9GwKDSR7FhCQ/exec', {
+        method: 'POST',
+        body: JSON.stringify({ email: email }),
+      }).then(function() {
+        form.style.display = 'none';
+        document.getElementById('wlSuccess').style.display = 'block';
+      }).catch(function() {
+        btn.disabled = false;
+        btn.textContent = 'Join Waitlist';
+        alert('Something went wrong. Please try again.');
+      });
     }
 
     // ── Smooth scroll

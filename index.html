@@ -105,10 +105,14 @@
       border-color: rgba(166,149,245,0.12);
       box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(166,149,245,0.04);
     }
-    .nav-logo { text-decoration: none; display: flex; align-items: center; line-height: 0; }
-    .nav-logo img { display: block; transition: opacity .2s; }
-    .nav-logo:hover img { opacity: .8; }
-    .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
+    .nav-logo { text-decoration: none; display: flex; align-items: center; gap: 10px; line-height: 1; transition: opacity .2s; }
+    .nav-logo img { display: block; height: 30px; width: auto; }
+    .nav-logo .wm { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 24px; color: var(--sand); letter-spacing: 0.5px; }
+    .nav-logo:hover { opacity: .85; }
+    .footer-logo { display: flex; align-items: center; gap: 8px; }
+    .footer-logo img { display: block; height: 26px; width: auto; }
+    .footer-logo .wm { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 20px; color: var(--sand); letter-spacing: 0.5px; }
+    .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
     .nav-links a {
       font-size: 13px; font-weight: 500;
       color: var(--muted); text-decoration: none;
@@ -1124,7 +1128,7 @@
 
   <!-- NAV -->
   <nav id="nav">
-    <a href="#" class="nav-logo"><img src="assets/logo-reversed.svg" alt="Vela Vision" height="30"></a>
+    <a href="#" class="nav-logo"><img src="assets/icon.svg" alt=""><span class="wm">Vela Vision</span></a>
     <ul class="nav-links">
       <li><a href="#how">How It Works</a></li>
 
@@ -1472,7 +1476,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <div><img src="assets/logo-reversed.svg" alt="Vela Vision" height="26"></div>
+    <div class="footer-logo"><img src="assets/icon.svg" alt=""><span class="wm">Vela Vision</span></div>
     <ul class="footer-links">
       <li><a href="#">Privacy</a></li>
       <li><a href="#">Terms</a></li>

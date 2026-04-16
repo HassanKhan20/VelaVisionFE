@@ -1061,6 +1061,47 @@
     .cta-note { font-size: 12px; color: var(--muted); opacity: .5; }
     .wl-success { display: none; font-size: 15px; color: var(--lavender); font-weight: 500; }
 
+    /* ── CONTACT ─────────────────────────────────────── */
+    .contact {
+      padding: 160px 48px;
+      position: relative; z-index: 1;
+      text-align: center;
+    }
+    .contact-inner { max-width: 640px; margin: 0 auto; }
+    .contact h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300; font-size: clamp(40px, 6vw, 64px);
+      color: var(--warm-white); line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .contact h2 em { font-style: italic; color: var(--lavender); }
+    .contact-body {
+      font-size: 16px; color: var(--muted);
+      line-height: 1.7; margin-bottom: 48px;
+    }
+    .contact-email {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 18px 36px;
+      border: 1px solid rgba(166,149,245,0.2);
+      border-radius: 100px;
+      background: rgba(107,90,224,0.06);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--lavender);
+      font-size: 16px; font-weight: 500;
+      text-decoration: none;
+      letter-spacing: .01em;
+      transition: background .25s, border-color .25s, box-shadow .25s, transform .2s;
+    }
+    .contact-email:hover {
+      background: rgba(107,90,224,0.14);
+      border-color: rgba(166,149,245,0.4);
+      box-shadow: 0 8px 32px rgba(107,90,224,0.25);
+      transform: translateY(-2px);
+    }
+    .contact-email svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    @media (max-width: 640px) { .contact { padding: 120px 24px; } }
+
     /* ── FOOTER ───────────────────────────────────────── */
     footer {
       padding: 44px 48px;
@@ -1120,6 +1161,535 @@
       .team-grid { grid-template-columns: 1fr; }
       .bento-grid { grid-template-columns: 1fr; }
     }
+
+    /* ── DATA SOURCE CITATION ────────────────────────── */
+    .data-source {
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 56px;
+      letter-spacing: 0.06em;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .data-source a {
+      color: var(--lavender);
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(166,149,245,0.35);
+      transition: color .2s ease, border-color .2s ease;
+    }
+    .data-source a:hover { color: var(--warm-white); border-bottom-color: var(--warm-white); }
+
+    /* ── APP SHOWCASE ─────────────────────────────────── */
+    .app-showcase {
+      padding: 180px 48px 160px;
+      position: relative;
+      overflow: hidden;
+    }
+    .app-bg-text {
+      position: absolute;
+      top: 50%; left: -8%;
+      transform: translateY(-50%) rotate(-90deg);
+      transform-origin: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300; font-size: 220px;
+      color: rgba(166,149,245,0.025);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: -.02em;
+    }
+    .app-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .app-header {
+      max-width: 720px;
+      margin: 0 auto 80px;
+      text-align: center;
+    }
+    .app-header .eyebrow { margin-bottom: 22px; }
+    .app-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(40px, 5.4vw, 76px);
+      line-height: 1.05;
+      color: var(--warm-white);
+      margin-bottom: 28px;
+      letter-spacing: -.01em;
+    }
+    .app-header h2 em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--violet), var(--lavender));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .app-header p {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* Stage holds phone + floating cards */
+    .app-stage {
+      position: relative;
+      height: 760px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 120px;
+    }
+    .app-stage-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 560px; height: 560px;
+      background: radial-gradient(circle, rgba(107,90,224,0.25), transparent 65%);
+      filter: blur(40px);
+      z-index: 0;
+      animation: appGlowPulse 8s ease-in-out infinite;
+    }
+    @keyframes appGlowPulse {
+      0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+    }
+    .app-stage-ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px dashed rgba(166,149,245,0.12);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .app-stage-ring--1 { width: 620px; height: 620px; animation: appRingSpin 60s linear infinite; }
+    .app-stage-ring--2 { width: 760px; height: 760px; animation: appRingSpin 90s linear infinite reverse; border-style: dotted; }
+    @keyframes appRingSpin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+    /* Phone */
+    .phone {
+      position: relative;
+      z-index: 3;
+      width: 290px;
+      height: 600px;
+      border-radius: 44px;
+      background: linear-gradient(160deg, #1A1428, #0E0B1A);
+      padding: 9px;
+      box-shadow:
+        0 60px 120px rgba(0,0,0,0.65),
+        0 0 0 1px rgba(166,149,245,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+      opacity: 0;
+      transform: translateY(40px) scale(0.96);
+      transition: opacity 1.1s cubic-bezier(.16,1,.3,1), transform 1.1s cubic-bezier(.16,1,.3,1);
+    }
+    .phone.app-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      animation: phoneFloat 9s ease-in-out infinite;
+    }
+    @keyframes phoneFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(0.4deg); }
+    }
+    .phone-notch {
+      position: absolute;
+      top: 18px; left: 50%;
+      transform: translateX(-50%);
+      width: 110px; height: 28px;
+      background: #08060F;
+      border-radius: 16px;
+      z-index: 4;
+    }
+    .phone-screen {
+      width: 100%; height: 100%;
+      border-radius: 36px;
+      background: #FAF5EE;
+      overflow: hidden;
+      position: relative;
+    }
+    .ps-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 28px 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px; font-weight: 500;
+      color: #2B2340;
+    }
+    .ps-status-icons { display: flex; gap: 4px; align-items: center; }
+    .ps-status-icons svg { width: 14px; height: 14px; }
+    .ps-content { padding: 38px 22px 20px; }
+    .ps-greet-eye {
+      font-size: 9px; font-weight: 500;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: #8B7FA8;
+      margin-bottom: 6px;
+    }
+    .ps-greet {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400; font-size: 26px;
+      color: #2B2340; line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .ps-greet em { font-style: italic; color: #6B5AE0; }
+    .ps-card {
+      background: #FFFFFF;
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      border-left: 3px solid #7AB5A0;
+      box-shadow: 0 2px 8px rgba(43,35,64,0.04);
+    }
+    .ps-card--med { border-left-color: #E8934A; }
+    .ps-card-label {
+      font-size: 8px; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: #8B7FA8; margin-bottom: 8px;
+    }
+    .ps-task {
+      display: flex; align-items: center; gap: 10px;
+      padding: 6px 0;
+      font-size: 12px; color: #2B2340;
+    }
+    .ps-task-check {
+      width: 16px; height: 16px;
+      border-radius: 5px;
+      border: 1.5px solid #C5BBE0;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ps-task-check.done {
+      background: #5C8E7A;
+      border-color: #5C8E7A;
+    }
+    .ps-task-check.done::after {
+      content: '✓';
+      color: #FFFFFF;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .ps-task.done span { text-decoration: line-through; opacity: 0.4; }
+    .ps-fab {
+      position: absolute;
+      bottom: 22px; right: 22px;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6B5AE0, #A695F5);
+      box-shadow: 0 8px 24px rgba(107,90,224,0.45);
+      display: flex; align-items: center; justify-content: center;
+      animation: psFabBreathe 3s ease-in-out infinite;
+    }
+    .ps-fab svg { width: 22px; height: 22px; color: #FFFFFF; }
+    @keyframes psFabBreathe {
+      0%, 100% { box-shadow: 0 8px 24px rgba(107,90,224,0.45); transform: scale(1); }
+      50% { box-shadow: 0 8px 36px rgba(107,90,224,0.7); transform: scale(1.04); }
+    }
+    .ps-tabbar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 72px;
+      background: #FFFFFF;
+      border-top: 1px solid #E8E0D4;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 24px 12px;
+    }
+    .ps-tab {
+      width: 24px; height: 24px;
+      color: #8B7FA8;
+    }
+    .ps-tab.active { color: #6B5AE0; }
+
+    /* Floating app cards */
+    .acard {
+      position: absolute;
+      background: rgba(10,8,18,0.78);
+      backdrop-filter: blur(28px) saturate(1.2);
+      -webkit-backdrop-filter: blur(28px) saturate(1.2);
+      border: 1px solid rgba(166,149,245,0.12);
+      border-radius: 14px;
+      padding: 16px 18px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.03);
+      z-index: 5;
+      opacity: 0;
+      transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+    }
+    .acard.app-visible { opacity: 1; }
+    .acard-eye {
+      font-size: 9px; font-weight: 500;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--lavender);
+      display: flex; align-items: center; gap: 7px;
+      margin-bottom: 12px;
+    }
+    .acard-eye-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--lavender);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    .acard-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400; font-size: 22px;
+      color: var(--warm-white); line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .acard-meta {
+      font-size: 11px; color: var(--muted); line-height: 1.5;
+    }
+
+    /* Voice card — top-left */
+    .acard--voice {
+      top: 6%; left: 0;
+      width: 230px;
+      transform: translateX(-40px) translateY(-10px);
+    }
+    .acard--voice.app-visible {
+      transform: translateX(0) translateY(0);
+      animation: appFloat1 8s ease-in-out infinite;
+    }
+    @keyframes appFloat1 {
+      0%, 100% { transform: translateY(0) rotate(-1deg); }
+      50% { transform: translateY(-14px) rotate(1deg); }
+    }
+    .voice-wave {
+      display: flex; align-items: center; gap: 3px;
+      height: 32px;
+      margin-top: 4px;
+    }
+    .voice-wave .vw {
+      width: 3px;
+      background: linear-gradient(180deg, var(--lavender), var(--violet));
+      border-radius: 2px;
+      animation: voiceWave 1.2s ease-in-out infinite;
+    }
+    .voice-wave .vw:nth-child(1) { animation-delay: 0s; height: 40%; }
+    .voice-wave .vw:nth-child(2) { animation-delay: .1s; height: 70%; }
+    .voice-wave .vw:nth-child(3) { animation-delay: .2s; height: 55%; }
+    .voice-wave .vw:nth-child(4) { animation-delay: .3s; height: 90%; }
+    .voice-wave .vw:nth-child(5) { animation-delay: .15s; height: 60%; }
+    .voice-wave .vw:nth-child(6) { animation-delay: .25s; height: 80%; }
+    .voice-wave .vw:nth-child(7) { animation-delay: .05s; height: 45%; }
+    .voice-wave .vw:nth-child(8) { animation-delay: .35s; height: 75%; }
+    .voice-wave .vw:nth-child(9) { animation-delay: .12s; height: 50%; }
+    .voice-wave .vw:nth-child(10) { animation-delay: .28s; height: 65%; }
+    .voice-wave .vw:nth-child(11) { animation-delay: .18s; height: 85%; }
+    .voice-wave .vw:nth-child(12) { animation-delay: .08s; height: 55%; }
+    @keyframes voiceWave {
+      0%, 100% { transform: scaleY(0.4); opacity: 0.6; }
+      50% { transform: scaleY(1); opacity: 1; }
+    }
+
+    /* Steps card — top-right */
+    .acard--hr {
+      top: 8%; right: 0;
+      width: 220px;
+      transform: translateX(40px) translateY(-10px);
+    }
+    .acard--hr.app-visible {
+      transform: translateX(0) translateY(0);
+      animation: appFloat2 9s ease-in-out infinite;
+    }
+    @keyframes appFloat2 {
+      0%, 100% { transform: translateY(0) rotate(.8deg); }
+      50% { transform: translateY(-16px) rotate(-.6deg); }
+    }
+    .hr-row {
+      display: flex; align-items: baseline; gap: 6px;
+      margin-bottom: 6px;
+    }
+    .hr-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px; color: var(--warm-white);
+      line-height: 1;
+    }
+    .hr-unit { font-size: 12px; color: var(--muted); letter-spacing: .04em; }
+    .hr-spark { width: 100%; height: 40px; }
+    .hr-spark rect {
+      transform-origin: bottom;
+      animation: barRise 0.6s cubic-bezier(.34,1.4,.64,1) both;
+    }
+    .hr-spark rect:nth-child(1) { animation-delay: 0.8s; }
+    .hr-spark rect:nth-child(2) { animation-delay: 0.92s; }
+    .hr-spark rect:nth-child(3) { animation-delay: 1.04s; }
+    .hr-spark rect:nth-child(4) { animation-delay: 1.16s; }
+    .hr-spark rect:nth-child(5) { animation-delay: 1.28s; }
+    .hr-spark rect:nth-child(6) { animation-delay: 1.40s; }
+    .hr-spark rect:nth-child(7) { animation-delay: 1.52s; }
+    @keyframes barRise {
+      from { transform: scaleY(0); opacity: 0; }
+      to   { transform: scaleY(1); opacity: 1; }
+    }
+
+    /* Patterns card — bottom-left */
+    .acard--patterns {
+      bottom: 14%; left: 4%;
+      width: 250px;
+      transform: translateX(-40px) translateY(20px);
+    }
+    .acard--patterns.app-visible {
+      transform: translateX(0) translateY(0);
+      animation: appFloat3 10s ease-in-out infinite;
+    }
+    @keyframes appFloat3 {
+      0%, 100% { transform: translateY(0) rotate(-.6deg); }
+      50% { transform: translateY(-12px) rotate(.5deg); }
+    }
+    .pattern-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .pattern-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .pattern-row:first-child { padding-top: 0; }
+    .pattern-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--violet);
+      flex-shrink: 0;
+      box-shadow: 0 0 10px rgba(107,90,224,0.6);
+    }
+    .pattern-text {
+      font-size: 11px;
+      color: var(--warm-white);
+      line-height: 1.4;
+    }
+    .pattern-text strong { color: var(--lavender); font-weight: 500; }
+
+    /* Doctor report card — bottom-right */
+    .acard--report {
+      bottom: 10%; right: 2%;
+      width: 220px;
+      transform: translateX(40px) translateY(20px);
+    }
+    .acard--report.app-visible {
+      transform: translateX(0) translateY(0);
+      animation: appFloat4 8.5s ease-in-out infinite;
+    }
+    @keyframes appFloat4 {
+      0%, 100% { transform: translateY(0) rotate(.7deg); }
+      50% { transform: translateY(-15px) rotate(-.4deg); }
+    }
+    .pdf-stack {
+      position: relative;
+      height: 90px;
+      margin-top: 6px;
+    }
+    .pdf-page {
+      position: absolute;
+      width: 70%; height: 100%;
+      background: linear-gradient(180deg, #FAF8F4, #E8E0D4);
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      overflow: hidden;
+      padding: 8px 10px;
+    }
+    .pdf-page::before {
+      content: '';
+      display: block;
+      height: 4px; width: 60%;
+      background: var(--violet);
+      border-radius: 2px;
+      margin-bottom: 6px;
+    }
+    .pdf-page::after {
+      content: '';
+      display: block;
+      height: 2px; width: 90%;
+      background: rgba(43,35,64,0.2);
+      border-radius: 1px;
+      box-shadow:
+        0 6px 0 rgba(43,35,64,0.15),
+        0 12px 0 rgba(43,35,64,0.15),
+        0 18px 0 rgba(43,35,64,0.15),
+        0 24px 0 rgba(43,35,64,0.15);
+    }
+    .pdf-page--3 {
+      left: 24%; top: 0;
+      transform: rotate(4deg);
+      opacity: 0.55;
+    }
+    .pdf-page--2 {
+      left: 16%; top: 4px;
+      transform: rotate(2deg);
+      opacity: 0.78;
+    }
+    .pdf-page--1 {
+      left: 8%; top: 8px;
+      z-index: 2;
+    }
+
+    /* Capability strip below stage */
+    .app-caps {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0;
+      max-width: 1080px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(166,149,245,0.08);
+      border-bottom: 1px solid rgba(166,149,245,0.08);
+    }
+    .app-cap {
+      padding: 28px 16px;
+      text-align: center;
+      border-right: 1px solid rgba(166,149,245,0.08);
+      transition: background .3s ease;
+    }
+    .app-cap:last-child { border-right: none; }
+    .app-cap:hover {
+      background: rgba(107,90,224,0.04);
+    }
+    .app-cap-icon {
+      width: 28px; height: 28px;
+      margin: 0 auto 12px;
+      color: var(--lavender);
+      stroke-width: 1.5;
+      transition: transform .3s ease, color .3s ease;
+    }
+    .app-cap:hover .app-cap-icon {
+      transform: translateY(-2px);
+      color: var(--warm-white);
+    }
+    .app-cap-label {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--muted);
+      transition: color .3s ease;
+    }
+    .app-cap:hover .app-cap-label { color: var(--warm-white); }
+
+    /* App showcase responsive */
+    @media (max-width: 980px) {
+      .app-stage { height: 920px; }
+      .acard--voice { top: 0; left: 50%; transform: translateX(calc(-50% - 40px)) translateY(-10px); }
+      .acard--voice.app-visible { transform: translateX(calc(-50% - 130px)) translateY(0); animation: none; }
+      .acard--hr { top: 0; right: auto; left: 50%; transform: translateX(calc(-50% + 40px)) translateY(-10px); }
+      .acard--hr.app-visible { transform: translateX(calc(-50% + 30px)) translateY(0); animation: none; }
+      .acard--patterns { bottom: auto; top: 660px; left: 50%; transform: translateX(calc(-50% - 130px)) translateY(20px); }
+      .acard--patterns.app-visible { transform: translateX(calc(-50% - 130px)) translateY(0); animation: none; }
+      .acard--report { bottom: auto; top: 660px; right: auto; left: 50%; transform: translateX(calc(-50% + 30px)) translateY(20px); }
+      .acard--report.app-visible { transform: translateX(calc(-50% + 30px)) translateY(0); animation: none; }
+      .app-caps { grid-template-columns: repeat(3, 1fr); }
+      .app-cap:nth-child(3) { border-right: none; }
+      .app-cap:nth-child(n+4) { border-top: 1px solid rgba(166,149,245,0.08); }
+    }
+    @media (max-width: 640px) {
+      .app-showcase { padding: 120px 24px 100px; }
+      .app-stage { height: 880px; }
+      .phone { width: 240px; height: 500px; }
+      .acard { padding: 12px 14px; }
+      .acard--voice, .acard--hr, .acard--patterns, .acard--report { width: 180px; }
+      .app-caps { grid-template-columns: repeat(2, 1fr); }
+      .app-cap:nth-child(3) { border-right: 1px solid rgba(166,149,245,0.08); }
+      .app-cap:nth-child(2n) { border-right: none; }
+      .app-cap:nth-child(n+3) { border-top: 1px solid rgba(166,149,245,0.08); }
+    }
   </style>
 </head>
 <body>
@@ -1131,8 +1701,9 @@
     <a href="#" class="nav-logo"><img src="assets/icon.svg" alt=""><span class="wm">Vela Vision</span></a>
     <ul class="nav-links">
       <li><a href="#how">How It Works</a></li>
-
+      <li><a href="#app">App</a></li>
       <li><a href="#team">Team</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="#waitlist" class="nav-cta">Join Waitlist</a>
     <button class="nav-menu-btn" aria-label="Menu">
@@ -1313,23 +1884,23 @@
     <div class="section-dot" style="bottom:15%;right:12%;animation-delay:-5s;" aria-hidden="true"></div>
     <div class="problem-inner">
       <p class="eyebrow r">The Problem</p>
-      <h2 class="r d1"><strong>7.2 million</strong> Americans can't recognize the faces of people they love.</h2>
+      <h2 class="r d1">Nearly <strong>7 million</strong> Americans 65+ are living with Alzheimer's — and most can't recognize the faces of people they love.</h2>
       <p class="r d2">Dementia robs patients of the most fundamental human experience — knowing who is in the room. The fear, confusion, and heartbreak is both profound and preventable.</p>
       <span class="pill r d3">No existing product solves this. Until now.</span>
     </div>
 
     <div class="bento-grid r d4" style="max-width:1200px; margin: 80px auto 0;">
       <div class="b-card b-card--a">
-        <div class="b-label">Projected Growth</div>
-        <div class="b-val" data-count="98">0<em>%</em></div>
-        <div class="b-sub">Increase by 2060</div>
+        <div class="b-label">Alzheimer's Cases by 2060</div>
+        <div class="b-val" data-count="100">0<em>%</em></div>
+        <div class="b-sub">Expected to double — 6.9M today → 13.8M</div>
         <div class="donut">
           <svg viewBox="0 0 120 120">
             <circle cx="60" cy="60" r="48" stroke="rgba(166,149,245,.08)" stroke-width="7" fill="none"/>
-            <circle cx="60" cy="60" r="48" stroke="url(#dg)" stroke-width="7" fill="none" stroke-dasharray="301.6" stroke-dashoffset="6" stroke-linecap="round"/>
+            <circle cx="60" cy="60" r="48" stroke="url(#dg)" stroke-width="7" fill="none" stroke-dasharray="301.6" stroke-dashoffset="0" stroke-linecap="round"/>
             <defs><linearGradient id="dg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#6B5AE0"/><stop offset="100%" stop-color="#A695F5"/></linearGradient></defs>
           </svg>
-          <div class="donut-val">98%</div>
+          <div class="donut-val">100%</div>
         </div>
       </div>
 
@@ -1347,8 +1918,8 @@
 
       <div class="b-card b-card--c">
         <div class="b-label">Annual Care Cost</div>
-        <div class="b-val" data-count="384" data-prefix="$">$0<em>B</em></div>
-        <div class="b-sub">US dementia care spending</div>
+        <div class="b-val" data-count="360" data-prefix="$">$0<em>B</em></div>
+        <div class="b-sub">US dementia care spending, 2024</div>
         <div class="spark">
           <svg viewBox="0 0 200 60" preserveAspectRatio="none">
             <defs>
@@ -1362,6 +1933,8 @@
         </div>
       </div>
     </div>
+
+    <p class="data-source r d5">Source: <a href="https://www.alz.org/alzheimers-dementia/facts-figures" target="_blank" rel="noopener">Alzheimer's Association — 2024 Alzheimer's Disease Facts and Figures</a></p>
   </section>
 
   <div class="divider"></div>
@@ -1402,6 +1975,178 @@
 
   <div class="divider"></div>
 
+  <!-- APP SHOWCASE -->
+  <section id="app" class="app-showcase">
+    <div class="app-bg-text" aria-hidden="true">COMPANION</div>
+    <div class="section-orb" style="width:420px;height:420px;background:var(--violet);top:8%;right:-8%;opacity:0.08;" aria-hidden="true"></div>
+    <div class="section-orb" style="width:340px;height:340px;background:var(--lavender);bottom:5%;left:-6%;opacity:0.06;" aria-hidden="true"></div>
+    <div class="section-dot" style="top:18%;left:8%;animation-delay:-4s;" aria-hidden="true"></div>
+    <div class="section-dot" style="bottom:25%;right:12%;animation-delay:-7s;" aria-hidden="true"></div>
+    <div class="section-dot" style="top:45%;right:6%;animation-delay:-2s;width:4px;height:4px;" aria-hidden="true"></div>
+
+    <div class="app-inner">
+      <div class="app-header">
+        <p class="eyebrow r">The Caregiver App</p>
+        <h2 class="r d1">For the people<br><em>who show up.</em></h2>
+        <p class="r d2">Vela's caregiver app keeps the family in sync — voice check-ins, doctor-ready reports, passive health trends, and quiet patterns nobody else would catch. Available now while the glasses ship.</p>
+      </div>
+
+      <div class="app-stage" id="appStage">
+        <div class="app-stage-glow" aria-hidden="true"></div>
+        <div class="app-stage-ring app-stage-ring--1" aria-hidden="true"></div>
+        <div class="app-stage-ring app-stage-ring--2" aria-hidden="true"></div>
+
+        <!-- Phone mockup -->
+        <div class="phone" id="appPhone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="ps-status">
+              <span>9:41</span>
+              <div class="ps-status-icons">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 18h2v-3H2zM6 18h2v-7H6zM10 18h2V8h-2zM14 18h2V4h-2zM18 18h2v-3h-2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 9.5L12 3l10 6.5v3.5l-2-1.3V18a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1v-6.3L2 13z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="7" width="18" height="10" rx="2.5" stroke="currentColor" stroke-width="1.5" fill="none"/><rect x="4" y="9" width="13" height="6" rx="1" fill="currentColor"/><rect x="21" y="10" width="2" height="4" rx="1" fill="currentColor"/></svg>
+              </div>
+            </div>
+
+            <div class="ps-content">
+              <p class="ps-greet-eye">Good morning</p>
+              <h3 class="ps-greet">Today with <em>Margaret</em></h3>
+
+              <div class="ps-card">
+                <div class="ps-card-label">Routine · 2 of 3 done</div>
+                <div class="ps-task done">
+                  <div class="ps-task-check done"></div>
+                  <span>Morning walk</span>
+                </div>
+                <div class="ps-task done">
+                  <div class="ps-task-check done"></div>
+                  <span>Breakfast</span>
+                </div>
+                <div class="ps-task">
+                  <div class="ps-task-check"></div>
+                  <span>Afternoon stretch</span>
+                </div>
+              </div>
+
+              <div class="ps-card ps-card--med">
+                <div class="ps-card-label">Medications · 1 due</div>
+                <div class="ps-task">
+                  <div class="ps-task-check"></div>
+                  <span>Donepezil — 5mg, 2:00 PM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="ps-fab" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            </div>
+
+            <div class="ps-tabbar" aria-hidden="true">
+              <svg class="ps-tab active" viewBox="0 0 24 24" fill="currentColor"><path d="M3 12l9-9 9 9v9a1 1 0 0 1-1 1h-5v-7H10v7H4a1 1 0 0 1-1-1z"/></svg>
+              <svg class="ps-tab" viewBox="0 0 24 24" fill="currentColor"><path d="M12 14a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
+              <svg class="ps-tab" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg>
+              <svg class="ps-tab" viewBox="0 0 24 24" fill="currentColor"><path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Voice check-in card -->
+        <div class="acard acard--voice" id="acVoice">
+          <div class="acard-eye"><span class="acard-eye-dot"></span> Voice Check-in</div>
+          <div class="acard-title">"She slept well last night."</div>
+          <div class="voice-wave" aria-hidden="true">
+            <span class="vw"></span><span class="vw"></span><span class="vw"></span><span class="vw"></span><span class="vw"></span><span class="vw"></span><span class="vw"></span><span class="vw"></span><span class="vw"></span><span class="vw"></span><span class="vw"></span><span class="vw"></span>
+          </div>
+        </div>
+
+        <!-- Steps card -->
+        <div class="acard acard--hr" id="acHr">
+          <div class="acard-eye"><span class="acard-eye-dot" style="background:#4ADE80;box-shadow:0 0 8px rgba(74,222,128,0.5);"></span> Daily Steps</div>
+          <div class="hr-row">
+            <span class="hr-val">6,203</span>
+            <span class="hr-unit">steps · today</span>
+          </div>
+          <svg class="hr-spark" viewBox="0 0 200 40" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="hrLg" x1="0" y1="0" x2="200" y2="0">
+                <stop offset="0%" stop-color="#6B5AE0"/>
+                <stop offset="100%" stop-color="#4ADE80"/>
+              </linearGradient>
+            </defs>
+            <!-- Bar chart style: 7 daily bars -->
+            <rect x="4"  y="26" width="20" height="14" rx="3" fill="url(#hrLg)" opacity="0.55"/>
+            <rect x="32" y="20" width="20" height="20" rx="3" fill="url(#hrLg)" opacity="0.65"/>
+            <rect x="60" y="16" width="20" height="24" rx="3" fill="url(#hrLg)" opacity="0.72"/>
+            <rect x="88" y="22" width="20" height="18" rx="3" fill="url(#hrLg)" opacity="0.60"/>
+            <rect x="116" y="10" width="20" height="30" rx="3" fill="url(#hrLg)" opacity="0.85"/>
+            <rect x="144" y="18" width="20" height="22" rx="3" fill="url(#hrLg)" opacity="0.70"/>
+            <rect x="172" y="6"  width="20" height="34" rx="3" fill="url(#hrLg)" opacity="1"/>
+          </svg>
+        </div>
+
+        <!-- Patterns card -->
+        <div class="acard acard--patterns" id="acPatterns">
+          <div class="acard-eye"><span class="acard-eye-dot"></span> Patterns We Noticed</div>
+          <div class="pattern-row">
+            <span class="pattern-dot"></span>
+            <span class="pattern-text">Restless <strong>3 of last 5 nights</strong> after 2pm caffeine.</span>
+          </div>
+          <div class="pattern-row">
+            <span class="pattern-dot"></span>
+            <span class="pattern-text">Sundowning <strong>begins ~5:30pm</strong> on cloudy days.</span>
+          </div>
+          <div class="pattern-row">
+            <span class="pattern-dot"></span>
+            <span class="pattern-text">Calmest <strong>during piano</strong> on Tuesdays.</span>
+          </div>
+        </div>
+
+        <!-- Doctor report card -->
+        <div class="acard acard--report" id="acReport">
+          <div class="acard-eye"><span class="acard-eye-dot"></span> Visit Report Ready</div>
+          <div class="acard-title">For Dr. Patel</div>
+          <div class="acard-meta">30-day summary · biomarker trends · medications · pattern notes</div>
+          <div class="pdf-stack" aria-hidden="true">
+            <div class="pdf-page pdf-page--3"></div>
+            <div class="pdf-page pdf-page--2"></div>
+            <div class="pdf-page pdf-page--1"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Capability strip -->
+      <div class="app-caps r d2">
+        <div class="app-cap">
+          <svg class="app-cap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          <div class="app-cap-label">Voice Check-ins</div>
+        </div>
+        <div class="app-cap">
+          <svg class="app-cap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <div class="app-cap-label">Health Trends</div>
+        </div>
+        <div class="app-cap">
+          <svg class="app-cap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          <div class="app-cap-label">Pattern Learning</div>
+        </div>
+        <div class="app-cap">
+          <svg class="app-cap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <div class="app-cap-label">Doctor Reports</div>
+        </div>
+        <div class="app-cap">
+          <svg class="app-cap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="17" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
+          <div class="app-cap-label">Family Sync</div>
+        </div>
+        <div class="app-cap">
+          <svg class="app-cap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg>
+          <div class="app-cap-label">AI Companion</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
 
   <!-- TESTIMONIAL -->
   <section class="testimonial" style="position:relative;">
@@ -1431,13 +2176,13 @@
         <div class="team-card r">
           <div class="team-avatar">AK</div>
           <div class="team-name">Aamir Khan</div>
-          <div class="team-role">CEO</div>
+          <div class="team-role">CTO</div>
           <div class="team-tags"><span class="team-tag">Technical Development</span></div>
         </div>
         <div class="team-card r d1">
           <div class="team-avatar">HK</div>
           <div class="team-name">Hassan Khan</div>
-          <div class="team-role">CTO</div>
+          <div class="team-role">CEO</div>
           <div class="team-tags"><span class="team-tag">Technical Development</span></div>
         </div>
         <div class="team-card r d2">
@@ -1449,7 +2194,7 @@
         <div class="team-card r d3">
           <div class="team-avatar">ZS</div>
           <div class="team-name">Zayd Sayeed</div>
-          <div class="team-role">CMO</div>
+          <div class="team-role">CPO</div>
           <div class="team-tags"><span class="team-tag">Marketing</span></div>
         </div>
       </div>
@@ -1474,13 +2219,27 @@
     </div>
   </section>
 
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="section-orb" style="width:380px;height:380px;background:var(--violet);top:50%;left:50%;transform:translate(-50%,-50%);opacity:.05;" aria-hidden="true"></div>
+    <div class="contact-inner">
+      <p class="eyebrow r">Contact</p>
+      <h2 class="r d1">Got a question?<br><em>Reach out.</em></h2>
+      <p class="contact-body r d2">Whether you're a caregiver, clinician, investor, or researcher — we'd love to hear from you.</p>
+      <a href="mailto:founder@velavision.org" class="contact-email r d3">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+        founder@velavision.org
+      </a>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo"><img src="assets/icon.svg" alt=""><span class="wm">Vela Vision</span></div>
     <ul class="footer-links">
       <li><a href="#">Privacy</a></li>
       <li><a href="#">Terms</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a href="#contact">Contact</a></li>
       <li><a href="#">Press</a></li>
     </ul>
     <div class="footer-copy">&copy; 2026 Vela Technologies, Inc.</div>
@@ -1586,6 +2345,25 @@
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('v'); });
     }, { threshold: .08, rootMargin: '0px 0px -30px 0px' });
     document.querySelectorAll('.r').forEach(el => ro.observe(el));
+
+    // ── App showcase reveal (phone + floating cards stagger in when section enters viewport)
+    const appStage = document.getElementById('appStage');
+    if (appStage) {
+      const appPhone = document.getElementById('appPhone');
+      const appCards = ['acVoice', 'acHr', 'acPatterns', 'acReport'].map(id => document.getElementById(id));
+      const appObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          appPhone?.classList.add('app-visible');
+          appCards.forEach((card, i) => {
+            if (!card) return;
+            setTimeout(() => card.classList.add('app-visible'), 350 + i * 180);
+          });
+          appObs.unobserve(e.target);
+        });
+      }, { threshold: 0.18 });
+      appObs.observe(appStage);
+    }
 
     // ── Animated counters
     const co = new IntersectionObserver(entries => {

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Vela Vision</title>
+  <meta name="description" content="Vela Vision privacy policy covering the caregiver app and smart glasses hardware.">
+  <link rel="icon" type="image/svg+xml" href="../assets/icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --violet: #6B5AE0; --lavender: #A695F5;
+      --sand: #F5F0E8; --warm-white: #FAF8F4;
+      --muted: #8B7FA8; --bg: #08060F;
+      --v700: #4F40B8;
+      --r-btn: 8px; --r-pill: 999px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg); color: var(--warm-white);
+      overflow-x: hidden; -webkit-font-smoothing: antialiased;
+    }
+
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: 9999;
+      pointer-events: none; opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 128px;
+    }
+
+    .spotlight {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(107,90,224,0.07), transparent 60%);
+    }
+
+    .r { opacity: 0; transform: translateY(40px); transition: opacity .9s cubic-bezier(0.16,1,0.3,1), transform .9s cubic-bezier(0.16,1,0.3,1); }
+    .r.v { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: .08s } .d2 { transition-delay: .16s } .d3 { transition-delay: .24s }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+      z-index: 200; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 8px 0 24px; height: 56px; width: min(90%, 1060px);
+      background: rgba(8,6,15,0.5);
+      backdrop-filter: blur(40px) saturate(1.4); -webkit-backdrop-filter: blur(40px) saturate(1.4);
+      border: 1px solid rgba(166,149,245,0.06); border-radius: 16px;
+      transition: all .5s cubic-bezier(.16,1,.3,1);
+    }
+    nav.scrolled {
+      top: 12px; background: rgba(8,6,15,0.88);
+      border-color: rgba(166,149,245,0.12);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(166,149,245,0.04);
+    }
+    .nav-logo { text-decoration: none; display: flex; align-items: center; gap: 10px; transition: opacity .2s; }
+    .nav-logo img { display: block; height: 30px; width: auto; }
+    .nav-logo .wm { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 24px; color: var(--sand); letter-spacing: .5px; }
+    .nav-logo:hover { opacity: .85; }
+    .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; padding: 8px 16px; border-radius: var(--r-btn); transition: color .25s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 0; height: 1.5px; background: var(--lavender); border-radius: 1px; transition: width .25s; }
+    .nav-links a:hover { color: var(--warm-white); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 16px; }
+    .nav-links a.active { color: var(--warm-white); }
+    .nav-cta { font-weight: 500; font-size: 12px; color: var(--sand); background: var(--violet); border: none; border-radius: var(--r-btn); padding: 10px 22px; text-decoration: none; transition: all .3s; white-space: nowrap; }
+    .nav-cta:hover { background: var(--v700); box-shadow: 0 4px 20px rgba(107,90,224,0.4); transform: translateY(-1px); }
+
+    /* ── UTILITY ── */
+    section { position: relative; z-index: 1; }
+    .eyebrow { font-weight: 500; font-size: 10px; letter-spacing: .25em; text-transform: uppercase; color: var(--lavender); display: inline-flex; align-items: center; gap: 10px; }
+    .eyebrow::before { content: ''; width: 28px; height: 1.5px; background: linear-gradient(90deg, var(--violet), var(--lavender)); border-radius: 1px; }
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(166,149,245,0.1), transparent); position: relative; z-index: 1; }
+    .orb { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(100px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 52vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 160px 48px 72px;
+      position: relative; overflow: hidden;
+    }
+    .hero-watermark {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: clamp(120px, 18vw, 300px);
+      color: rgba(107,90,224,0.03); white-space: nowrap;
+      pointer-events: none; user-select: none; letter-spacing: -.04em;
+    }
+    .hero-corner { position: absolute; width: 60px; height: 60px; pointer-events: none; opacity: .06; }
+    .hero-corner--tl { top: 80px; left: 48px; border-top: 1px solid var(--lavender); border-left: 1px solid var(--lavender); }
+    .hero-corner--tr { top: 80px; right: 48px; border-top: 1px solid var(--lavender); border-right: 1px solid var(--lavender); }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(48px, 6.5vw, 88px); line-height: .92; letter-spacing: -.03em; margin-bottom: 22px; }
+    .hero h1 em { font-style: italic; background: linear-gradient(135deg, var(--lavender), #D4CEFF, var(--violet)); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: gradShift 6s ease-in-out infinite; }
+    @keyframes gradShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    .hero-meta { font-size: 13px; color: var(--muted); margin-top: 8px; }
+
+    /* ── CONTENT ── */
+    .content { padding: 72px 48px 120px; }
+    .content-inner { max-width: 760px; margin: 0 auto; }
+
+    .section-block { margin-bottom: 56px; }
+    .section-block h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300; font-size: clamp(28px, 3.5vw, 42px);
+      color: var(--warm-white); line-height: 1.1;
+      margin-bottom: 20px;
+      display: flex; align-items: baseline; gap: 14px;
+    }
+    .section-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px; color: var(--lavender); opacity: .4;
+      flex-shrink: 0;
+    }
+    .section-block p {
+      font-size: 14px; line-height: 1.85; color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .section-block p:last-child { margin-bottom: 0; }
+    .section-block strong { color: var(--warm-white); font-weight: 500; }
+    .section-block ul {
+      list-style: none; margin: 12px 0 14px;
+    }
+    .section-block ul li {
+      font-size: 14px; line-height: 1.75; color: var(--muted);
+      padding: 6px 0 6px 20px; position: relative;
+    }
+    .section-block ul li::before {
+      content: ''; position: absolute; left: 0; top: 15px;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: rgba(166,149,245,0.35);
+    }
+    .section-block a { color: var(--lavender); text-decoration: none; border-bottom: 1px dotted rgba(166,149,245,0.35); transition: color .2s, border-color .2s; }
+    .section-block a:hover { color: var(--warm-white); border-color: var(--warm-white); }
+
+    .highlight-card {
+      background: rgba(107,90,224,0.06);
+      border: 1px solid rgba(166,149,245,0.12);
+      border-radius: 12px; padding: 22px 24px;
+      margin: 20px 0;
+    }
+    .highlight-card p { margin-bottom: 0; }
+
+    .toc {
+      background: rgba(107,90,224,0.04);
+      border: 1px solid rgba(166,149,245,0.08);
+      border-radius: 12px; padding: 28px 32px;
+      margin-bottom: 56px;
+    }
+    .toc-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--lavender); margin-bottom: 16px; display: block; }
+    .toc ol { list-style: none; counter-reset: toc; }
+    .toc ol li { counter-increment: toc; padding: 5px 0; }
+    .toc ol li a {
+      font-size: 13px; color: var(--muted); text-decoration: none;
+      display: flex; align-items: center; gap: 12px; transition: color .2s;
+    }
+    .toc ol li a::before { content: counter(toc, decimal-leading-zero); font-family: 'Cormorant Garamond', serif; font-size: 14px; color: rgba(166,149,245,0.3); min-width: 24px; }
+    .toc ol li a:hover { color: var(--warm-white); }
+
+    /* ── CONTACT ── */
+    .contact-block {
+      text-align: center; padding: 48px;
+      background: rgba(107,90,224,0.05);
+      border: 1px solid rgba(166,149,245,0.1);
+      border-radius: 16px; margin-top: 64px;
+    }
+    .contact-block h3 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 36px; color: var(--warm-white); margin-bottom: 12px; }
+    .contact-block p { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+    .contact-email { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; border-radius: 100px; border: 1px solid rgba(166,149,245,0.2); background: rgba(107,90,224,0.06); color: var(--lavender); font-size: 15px; font-weight: 500; text-decoration: none; transition: background .25s, border-color .25s, box-shadow .25s, transform .2s; }
+    .contact-email:hover { background: rgba(107,90,224,0.14); border-color: rgba(166,149,245,0.4); box-shadow: 0 8px 32px rgba(107,90,224,0.25); transform: translateY(-2px); }
+    .contact-email svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ── FOOTER ── */
+    footer { padding: 44px 48px; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; border-top: 1px solid rgba(166,149,245,0.06); }
+    .footer-logo { display: flex; align-items: center; gap: 8px; }
+    .footer-logo img { display: block; height: 26px; width: auto; }
+    .footer-logo .wm { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 20px; color: var(--sand); letter-spacing: .5px; }
+    .footer-links { display: flex; gap: 28px; list-style: none; }
+    .footer-links a { font-size: 12px; font-weight: 500; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover, .footer-links a.active { color: var(--warm-white); }
+    .footer-copy { font-size: 11px; color: var(--muted); opacity: .4; }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 16px; width: calc(100% - 20px); }
+      .nav-links { display: none; }
+      .hero { padding: 120px 24px 56px; }
+      .content { padding: 48px 24px 80px; }
+      .toc { padding: 20px; }
+      .contact-block { padding: 32px 20px; }
+      footer { flex-direction: column; gap: 18px; text-align: center; padding: 28px 24px; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="spotlight" id="spotlight"></div>
+
+  <nav id="nav">
+    <a href="../" class="nav-logo">
+      <img src="../assets/icon.svg" alt="">
+      <span class="wm">Vela Vision</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../#how">How It Works</a></li>
+      <li><a href="../#app">App</a></li>
+      <li><a href="../#team">Team</a></li>
+      <li><a href="../#contact">Contact</a></li>
+      <li><a href="../support/">Support</a></li>
+    </ul>
+    <a href="../#waitlist" class="nav-cta">Join Waitlist</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-watermark" aria-hidden="true">PRIVACY</div>
+    <div class="orb" style="width:480px;height:480px;background:var(--violet);top:-25%;right:-10%;opacity:.07;animation:drift1 20s ease-in-out infinite;" aria-hidden="true"></div>
+    <div class="orb" style="width:300px;height:300px;background:var(--lavender);bottom:-15%;left:-5%;opacity:.05;animation:drift2 24s ease-in-out infinite;" aria-hidden="true"></div>
+    <div class="hero-corner hero-corner--tl" aria-hidden="true"></div>
+    <div class="hero-corner hero-corner--tr" aria-hidden="true"></div>
+    <p class="eyebrow r">Legal</p>
+    <h1 class="r d1">Privacy<br><em>Policy</em></h1>
+    <p class="hero-meta r d2">Effective date: May 11, 2026 &nbsp;·&nbsp; Vela Technologies, Inc.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="content">
+    <div class="content-inner">
+
+      <div class="toc r">
+        <span class="toc-label">Contents</span>
+        <ol>
+          <li><a href="#s1">What we collect</a></li>
+          <li><a href="#s2">How we use your data</a></li>
+          <li><a href="#s3">Face recognition &amp; the glasses</a></li>
+          <li><a href="#s4">Data sharing</a></li>
+          <li><a href="#s5">Data retention &amp; deletion</a></li>
+          <li><a href="#s6">Security</a></li>
+          <li><a href="#s7">Children's privacy</a></li>
+          <li><a href="#s8">Your rights</a></li>
+          <li><a href="#s9">Changes to this policy</a></li>
+          <li><a href="#s10">Contact us</a></li>
+        </ol>
+      </div>
+
+      <div class="highlight-card r d1">
+        <p>This policy covers two Vela Vision products: the <strong>Vela caregiver and patient mobile app</strong> (iOS), and the <strong>Vela smart glasses</strong> hardware. We've written this in plain language — if anything is unclear, <a href="mailto:founder@velavision.org">reach out</a> and we'll explain it.</p>
+      </div>
+
+      <!-- 1 -->
+      <div class="section-block r" id="s1">
+        <h2><span class="section-num">01</span> What we collect</h2>
+        <p><strong>Account information.</strong> When you create an account, we collect your name, email address, and the role you choose (patient or caregiver). This is used to authenticate you and personalize your experience.</p>
+        <p><strong>Care data.</strong> Caregivers and patients can add daily routines, medication schedules, caregiver notes, and help alerts. This data is stored on our servers and is only visible to members of the linked care team.</p>
+        <p><strong>Health data.</strong> With your permission, the app may read health metrics (such as steps and heart rate) from Apple HealthKit. This data is used only to display trends and is never shared with third parties or used for advertising.</p>
+        <p><strong>Face photos (app).</strong> Caregivers can upload photos of people in the patient's life to enable face recognition via the glasses. These photos are stored securely and used solely for recognition purposes within your care team.</p>
+        <p><strong>Location data.</strong> With permission, the app may use approximate location to power zone alerts (for example, notifying a caregiver when a patient leaves a defined area). We do not store precise location history.</p>
+        <p><strong>Device and usage data.</strong> We collect standard technical information such as device type, operating system version, and crash reports to improve app stability. We do not sell or share this data.</p>
+      </div>
+
+      <!-- 2 -->
+      <div class="section-block r" id="s2">
+        <h2><span class="section-num">02</span> How we use your data</h2>
+        <p>We use your data only to provide and improve Vela Vision. Specifically:</p>
+        <ul>
+          <li>To authenticate you and maintain your session securely</li>
+          <li>To display care team data, routines, medications, and health trends</li>
+          <li>To power the glasses' face recognition feature using enrolled photos</li>
+          <li>To send push notifications for help alerts, reminders, and care team updates</li>
+          <li>To diagnose crashes and improve app performance</li>
+          <li>To process subscription payments via the App Store</li>
+        </ul>
+        <p>We do not use your data for advertising, we do not build advertising profiles, and we do not sell your data to any third party.</p>
+      </div>
+
+      <!-- 3 -->
+      <div class="section-block r" id="s3">
+        <h2><span class="section-num">03</span> Face recognition &amp; the glasses</h2>
+        <p>The Vela smart glasses use an on-device AI model to recognize faces of enrolled individuals. Here is how this works and what it means for your privacy:</p>
+        <ul>
+          <li><strong>On-device processing.</strong> Face recognition inference runs entirely on the glasses hardware. Live camera frames are not streamed to our servers or any cloud service during normal operation.</li>
+          <li><strong>Enrolled photos.</strong> Photos uploaded by a caregiver are used to generate a facial recognition model stored on the device. The original photos are retained on our servers so the model can be updated if needed.</li>
+          <li><strong>No bystander storage.</strong> Faces of people who are not enrolled are not captured, stored, or processed beyond the instant of the recognition attempt.</li>
+          <li><strong>Camera access.</strong> The glasses camera is active only when the device is powered on and worn. There is no remote activation of the camera.</li>
+          <li><strong>Data sync.</strong> Recognized-face events (name, relationship, timestamp) may be synced to the app to populate the timeline. This data is encrypted in transit and at rest.</li>
+        </ul>
+        <div class="highlight-card">
+          <p>Biometric data generated by the face recognition model is sensitive. We treat it as such — it is never shared with third parties, used for any purpose other than in-session recognition, or retained beyond the life of your account.</p>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="section-block r" id="s4">
+        <h2><span class="section-num">04</span> Data sharing</h2>
+        <p>We do not sell your personal data. We share data only in the following limited circumstances:</p>
+        <ul>
+          <li><strong>Care team members.</strong> Data you add to a care profile is visible to all members of that care team (primary caregiver and invited members).</li>
+          <li><strong>Service providers.</strong> We use a small number of trusted infrastructure providers to operate the service: Supabase (authentication), MongoDB Atlas (database), and Apple (push notifications and App Store payments). These providers process data on our behalf under strict data processing agreements and may not use your data for their own purposes.</li>
+          <li><strong>Legal requirements.</strong> We may disclose data if required to do so by law or in response to valid legal process.</li>
+          <li><strong>Business transfer.</strong> If Vela Technologies is acquired or merges with another company, your data may be transferred as part of that transaction. We will notify you before your data becomes subject to a different privacy policy.</li>
+        </ul>
+      </div>
+
+      <!-- 5 -->
+      <div class="section-block r" id="s5">
+        <h2><span class="section-num">05</span> Data retention &amp; deletion</h2>
+        <p>We retain your data for as long as your account is active. When you delete your account, we permanently delete your personal information, care data, enrolled face photos, and any associated biometric models within 30 days.</p>
+        <p>To delete your account, email us at <a href="mailto:founder@velavision.org">founder@velavision.org</a> with the subject line "Delete my account." We will confirm deletion within 5 business days.</p>
+        <p>Aggregated, de-identified usage statistics (with no link to any individual) may be retained indefinitely for product improvement.</p>
+      </div>
+
+      <!-- 6 -->
+      <div class="section-block r" id="s6">
+        <h2><span class="section-num">06</span> Security</h2>
+        <p>We take the security of sensitive health and biometric data seriously. Our measures include:</p>
+        <ul>
+          <li>All data is encrypted in transit using TLS 1.2 or higher</li>
+          <li>Data at rest is encrypted on our database servers</li>
+          <li>Authentication tokens are short-lived and rotated on each session</li>
+          <li>Access to production systems is restricted to core team members</li>
+          <li>The glasses use local storage with no unauthenticated remote access</li>
+        </ul>
+        <p>No system is perfectly secure. If you believe your account has been compromised, contact us immediately at <a href="mailto:founder@velavision.org">founder@velavision.org</a>.</p>
+      </div>
+
+      <!-- 7 -->
+      <div class="section-block r" id="s7">
+        <h2><span class="section-num">07</span> Children's privacy</h2>
+        <p>Vela Vision is not directed at children under 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal information, please contact us and we will delete it promptly.</p>
+      </div>
+
+      <!-- 8 -->
+      <div class="section-block r" id="s8">
+        <h2><span class="section-num">08</span> Your rights</h2>
+        <p>Depending on where you live, you may have rights regarding your personal data, including:</p>
+        <ul>
+          <li><strong>Access.</strong> Request a copy of the personal data we hold about you.</li>
+          <li><strong>Correction.</strong> Ask us to correct inaccurate data.</li>
+          <li><strong>Deletion.</strong> Ask us to delete your data (see section 5).</li>
+          <li><strong>Portability.</strong> Request your data in a machine-readable format.</li>
+          <li><strong>Objection.</strong> Object to certain uses of your data.</li>
+        </ul>
+        <p>To exercise any of these rights, email <a href="mailto:founder@velavision.org">founder@velavision.org</a>. We will respond within 30 days.</p>
+      </div>
+
+      <!-- 9 -->
+      <div class="section-block r" id="s9">
+        <h2><span class="section-num">09</span> Changes to this policy</h2>
+        <p>We may update this policy from time to time. When we make material changes, we will notify you by email or through a notice in the app at least 14 days before the changes take effect. The effective date at the top of this page will always reflect the most recent version.</p>
+        <p>Continued use of Vela Vision after changes take effect constitutes acceptance of the updated policy.</p>
+      </div>
+
+      <!-- 10 -->
+      <div class="section-block r" id="s10">
+        <h2><span class="section-num">10</span> Contact us</h2>
+        <p>If you have any questions about this privacy policy or how we handle your data, please reach out.</p>
+      </div>
+
+      <div class="contact-block r">
+        <h3>Questions about privacy?</h3>
+        <p>We're a small team and we read every email.</p>
+        <a href="mailto:founder@velavision.org" class="contact-email">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          founder@velavision.org
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">
+      <img src="../assets/icon.svg" alt="">
+      <span class="wm">Vela Vision</span>
+    </div>
+    <ul class="footer-links">
+      <li><a href="../privacy/" class="active">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="../#contact">Contact</a></li>
+      <li><a href="../support/">Support</a></li>
+    </ul>
+    <div class="footer-copy">&copy; 2026 Vela Technologies, Inc.</div>
+  </footer>
+
+  <script>
+    document.addEventListener('mousemove', e => {
+      document.getElementById('spotlight').style.setProperty('--mx', e.clientX + 'px');
+      document.getElementById('spotlight').style.setProperty('--my', e.clientY + 'px');
+    });
+
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', scrollY > 40);
+    }, { passive: true });
+
+    const revealEls = document.querySelectorAll('.r');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('v'); observer.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    revealEls.forEach(el => observer.observe(el));
+
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes drift1 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-22px,16px); } }
+      @keyframes drift2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(18px,-12px); } }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>

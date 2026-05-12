@@ -1690,6 +1690,36 @@
       .app-cap:nth-child(2n) { border-right: none; }
       .app-cap:nth-child(n+3) { border-top: 1px solid rgba(166,149,245,0.08); }
     }
+
+    /* ── LIGHT MODE ──────────────────────────────────────── */
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #F5F1EB;
+        --warm-white: #1A1428;
+        --muted: #6B5F7A;
+        --sand: #2B2340;
+      }
+      body::after { opacity: .018; }
+      nav { background: rgba(245,241,235,0.55); border-color: rgba(107,90,224,0.1); }
+      nav.scrolled { background: rgba(245,241,235,0.94); border-color: rgba(107,90,224,0.16); box-shadow: 0 8px 32px rgba(43,35,64,0.08); }
+      .hero-watermark { color: rgba(107,90,224,0.04); }
+      .hero-corner { opacity: .12; }
+      .quote-bg { color: rgba(107,90,224,0.04); }
+      .divider { background: linear-gradient(90deg, transparent, rgba(107,90,224,0.14), transparent); }
+      .steps::before { background: linear-gradient(90deg, transparent, rgba(107,90,224,0.2), rgba(107,90,224,0.2), transparent); }
+      .acard { background: rgba(255,255,255,0.92); border-color: rgba(107,90,224,0.12); box-shadow: 0 8px 32px rgba(43,35,64,0.1), inset 0 1px 0 rgba(255,255,255,0.9); }
+      .acard-title { color: #1A1428; }
+      .acard-meta { color: #6B5F7A; }
+      .pattern-text { color: #1A1428; }
+      .hr-unit { color: #6B5F7A; }
+      .app-caps, .app-cap { border-color: rgba(107,90,224,0.1); }
+      .team-card { background: rgba(255,255,255,0.72); border-color: rgba(107,90,224,0.1); }
+      .team-card:hover { border-color: rgba(107,90,224,0.24); box-shadow: 0 16px 48px rgba(43,35,64,0.1); }
+      .team-tag { background: rgba(107,90,224,0.05); border-color: rgba(107,90,224,0.1); }
+      .wl-input { background: rgba(255,255,255,0.72); border-color: rgba(107,90,224,0.18); color: #1A1428; }
+      .wl-input:focus { background: rgba(255,255,255,0.98); }
+      footer { border-color: rgba(107,90,224,0.1); }
+    }
   </style>
 </head>
 <body>

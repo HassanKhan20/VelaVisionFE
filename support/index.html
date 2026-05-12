@@ -333,6 +333,29 @@
       footer { flex-direction: column; gap: 18px; text-align: center; padding: 28px 24px; }
       .footer-links { flex-wrap: wrap; justify-content: center; }
     }
+
+    /* ── LIGHT MODE ──────────────────────────── */
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #F5F1EB;
+        --warm-white: #1A1428;
+        --muted: #6B5F7A;
+        --sand: #2B2340;
+      }
+      body::after { opacity: .018; }
+      nav { background: rgba(245,241,235,0.55); border-color: rgba(107,90,224,0.1); }
+      nav.scrolled { background: rgba(245,241,235,0.94); border-color: rgba(107,90,224,0.16); box-shadow: 0 8px 32px rgba(43,35,64,0.08); }
+      .hero-watermark { color: rgba(107,90,224,0.04); }
+      .hero-corner { opacity: .12; }
+      .divider { background: linear-gradient(90deg, transparent, rgba(107,90,224,0.14), transparent); }
+      .faq-item { background: rgba(255,255,255,0.72); border-color: rgba(107,90,224,0.1); }
+      .faq-item:hover { background: rgba(255,255,255,0.92); border-color: rgba(107,90,224,0.22); box-shadow: 0 8px 40px rgba(43,35,64,0.08); }
+      .faq-q { color: #1A1428; }
+      .faq-a { color: #6B5F7A; }
+      .faq-a a:hover { color: #1A1428; border-color: #1A1428; }
+      .contact-email { background: rgba(107,90,224,0.07); }
+      footer { border-color: rgba(107,90,224,0.1); }
+    }
   </style>
 </head>
 <body>

@@ -815,6 +815,45 @@
       nav { padding: 0 16px; width: calc(100% - 20px); }
       .nav-links { display: none; }
     }
+
+    /* ── LIGHT MODE ──────────────────────────────────────── */
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #F5F1EB;
+        --warm-white: #1A1428;
+        --muted: #6B5F7A;
+        --sand: #2B2340;
+      }
+      body::after { opacity: .018; }
+      nav { background: rgba(245,241,235,0.55); border-color: rgba(107,90,224,0.1); }
+      nav.scrolled { background: rgba(245,241,235,0.94); border-color: rgba(107,90,224,0.16); box-shadow: 0 8px 32px rgba(43,35,64,0.08); }
+      .hero-watermark { color: rgba(107,90,224,0.04); }
+      .hero-corner { opacity: .12; }
+      .divider { background: linear-gradient(90deg, transparent, rgba(107,90,224,0.14), transparent); }
+      .btn-ghost { color: #6B5F7A; border-color: rgba(107,90,224,0.22); }
+      .btn-ghost:hover { color: #1A1428; border-color: rgba(107,90,224,0.45); }
+      .stats-band { border-color: rgba(107,90,224,0.1); }
+      .stat-item { border-color: rgba(107,90,224,0.1); }
+      .feature-copy p { color: #6B5F7A; }
+      .feature-pill { background: rgba(107,90,224,0.07); border-color: rgba(107,90,224,0.16); }
+      .f-card { background: rgba(255,255,255,0.9); border-color: rgba(107,90,224,0.14); box-shadow: 0 8px 32px rgba(43,35,64,0.1); }
+      .f-card-val { color: #1A1428; }
+      .f-card-sub { color: #6B5F7A; }
+      .f-stat-label { color: #6B5F7A; }
+      .f-stat-val { color: #1A1428; }
+      .avatar { border-color: rgba(245,241,235,0.95); }
+      .avatar-count { color: #6B5F7A; }
+      .plan-card { background: rgba(255,255,255,0.75); border-color: rgba(107,90,224,0.12); }
+      .plan-card:hover { border-color: rgba(107,90,224,0.28); }
+      .plan-card--featured { background: rgba(107,90,224,0.05); border-color: rgba(107,90,224,0.32); }
+      .plan-price { color: #1A1428; }
+      .plan-period { color: #6B5F7A; }
+      .plan-feature { color: #6B5F7A; }
+      .plan-feature.active { color: #1A1428; }
+      .plan-cta--ghost { color: #6B5F7A; border-color: rgba(107,90,224,0.18); }
+      .plan-cta--ghost:hover { color: #1A1428; }
+      footer { border-color: rgba(107,90,224,0.1); }
+    }
   </style>
 </head>
 <body>

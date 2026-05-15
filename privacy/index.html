@@ -294,6 +294,7 @@
           <li>To display care team data, routines, medications, and health trends</li>
           <li>To power the glasses' face recognition feature using enrolled photos</li>
           <li>To send push notifications for help alerts, reminders, and care team updates</li>
+          <li>To power AI-assisted features — including the care assistant, check-in summaries, visit reports, behavioral insights, and voice check-ins — using third-party AI services (see section 4)</li>
           <li>To diagnose crashes and improve app performance</li>
           <li>To process subscription payments via the App Store</li>
         </ul>
@@ -322,7 +323,14 @@
         <p>We do not sell your personal data. We share data only in the following limited circumstances:</p>
         <ul>
           <li><strong>Care team members.</strong> Data you add to a care profile is visible to all members of that care team (primary caregiver and invited members).</li>
-          <li><strong>Service providers.</strong> We use a small number of trusted infrastructure providers to operate the service: Supabase (authentication), MongoDB Atlas (database), and Apple (push notifications and App Store payments). These providers process data on our behalf under strict data processing agreements and may not use your data for their own purposes.</li>
+            <li><strong>Infrastructure providers.</strong> We use a small number of trusted infrastructure providers to operate the service: Supabase (authentication), MongoDB Atlas (database), and Apple (push notifications and App Store payments). These providers process data on our behalf under strict data processing agreements and may not use your data for their own purposes.</li>
+          <li><strong>AI service providers.</strong> Several features in the Vela app are powered by third-party AI services. When you use these features, relevant care data is sent to the service as described below. All three providers are contractually prohibited from using your data to train their models or for any purpose other than returning a response.
+            <ul style="margin-top: 10px;">
+              <li><strong>Groq (LLaMA 3.3).</strong> Powers the in-app care assistant chat. When you send a message, Groq receives your message text along with the patient's name, daily routines, medications, reminders, and recent conversation history to generate a contextual response. <a href="https://groq.com/privacy-policy/" target="_blank" rel="noopener">Groq Privacy Policy</a></li>
+              <li><strong>Google Gemini.</strong> Powers care summaries, visit report generation, behavioral pattern analysis, and voice check-ins. Google Gemini may receive check-in notes, caregiver observations, patient event data, and live voice audio depending on the feature used. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></li>
+              <li><strong>Mem0.</strong> Powers the app's memory layer, which allows the assistant to remember care context across sessions. Mem0 receives check-in notes and care data to store and retrieve relevant memories. <a href="https://mem0.ai/privacy-policy" target="_blank" rel="noopener">Mem0 Privacy Policy</a></li>
+            </ul>
+          </li>
           <li><strong>Legal requirements.</strong> We may disclose data if required to do so by law or in response to valid legal process.</li>
           <li><strong>Business transfer.</strong> If Vela Technologies is acquired or merges with another company, your data may be transferred as part of that transaction. We will notify you before your data becomes subject to a different privacy policy.</li>
         </ul>
@@ -332,7 +340,7 @@
       <div class="section-block r" id="s5">
         <h2><span class="section-num">05</span> Data retention &amp; deletion</h2>
         <p>We retain your data for as long as your account is active. When you delete your account, we permanently delete your personal information, care data, enrolled face photos, and any associated biometric models within 30 days.</p>
-        <p>To delete your account, email us at <a href="mailto:founder@velavision.org">founder@velavision.org</a> with the subject line "Delete my account." We will confirm deletion within 5 business days.</p>
+        <p>To delete your account, go to <strong>Settings → Delete Account</strong> in the app. Your data will be permanently removed within 30 days. You can also request deletion by emailing <a href="mailto:founder@velavision.org">founder@velavision.org</a> with the subject line "Delete my account" and we will confirm within 5 business days.</p>
         <p>Aggregated, de-identified usage statistics (with no link to any individual) may be retained indefinitely for product improvement.</p>
       </div>
 

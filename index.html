@@ -1121,6 +1121,55 @@
       position: relative; z-index: 1;
     }
 
+    /* ── VIDEO SECTION ───────────────────────────────── */
+    .video-section {
+      padding: 120px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .video-section-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .video-section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .video-section-header .eyebrow { margin-bottom: 20px; }
+    .video-section-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--warm-white);
+    }
+    .video-section-header h2 em {
+      font-style: italic;
+      color: var(--lavender);
+    }
+    .video-wrapper {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #000;
+      box-shadow:
+        0 0 0 1px rgba(166,149,245,0.12),
+        0 40px 120px rgba(0,0,0,0.6),
+        0 0 80px rgba(107,90,224,0.08);
+    }
+    .video-wrapper video {
+      width: 100%;
+      display: block;
+      border-radius: 16px;
+    }
+    .video-caption {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
     /* ── RESPONSIVE ──────────────────────────────────── */
     @media (max-width: 1024px) {
       .bento-grid { grid-template-columns: repeat(3, 1fr); }
@@ -1915,6 +1964,26 @@
       <div class="marquee-item">Face Recognition <span></span> Memory Care <span></span> On-Device AI <span></span> Privacy-First <span></span> 14-Hour Battery <span></span> Voice Companion <span></span> Caregiver App <span></span> Real-Time HUD <span></span> 40g Frame <span></span> Bone Conduction <span></span></div>
     </div>
   </div>
+
+  <!-- VIDEO -->
+  <section class="video-section" style="position:relative;">
+    <div class="section-orb" style="width:400px;height:400px;background:var(--violet);top:50%;left:-5%;transform:translateY(-50%);opacity:.06;" aria-hidden="true"></div>
+    <div class="section-orb" style="width:300px;height:300px;background:var(--lavender);top:20%;right:-3%;opacity:.05;" aria-hidden="true"></div>
+    <div class="video-section-inner">
+      <div class="video-section-header">
+        <p class="eyebrow r">See It In Action</p>
+        <h2 class="r d1">Vision AI, <em>live.</em></h2>
+      </div>
+      <div class="video-wrapper r d2">
+        <video controls preload="metadata" playsinline>
+          <source src="assets/knockv2.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="video-caption r d3">Vision AI recognizing a face in real time — name, relationship, and context, delivered instantly.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
 
   <!-- PROBLEM + DATA -->
   <section class="problem" id="problem">

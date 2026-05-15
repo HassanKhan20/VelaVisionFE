@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="240" viewBox="0 0 200 240">
-<style>svg{color:#A695F5}@media(prefers-color-scheme:light){svg{color:#4F40B8}}</style>
+<style>path{fill:#A695F5}@media(prefers-color-scheme:light){path{fill:#4F40B8}}</style>
 <g transform="translate(48.53,24.00) scale(1.0293)"><g transform="translate(-74.0395,-35.1043) scale(0.083074,0.083074)">
   <g transform="translate(0.000000,3113.000000) scale(0.100000,-0.100000)" fill="currentColor" fill-rule="evenodd">
   <path d="M15232 26901 c-7 -4 -16 -20 -20 -36 -8 -30 -18 -37 -67 -52 -21 -6

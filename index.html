@@ -276,10 +276,71 @@
     .hero {
       min-height: 100svh;
       display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      padding: 140px 48px 80px;
+      align-items: flex-end; justify-content: center;
+      text-align: right;
+      padding: 150px 7vw 110px;
       position: relative; overflow: hidden;
+      background: var(--bg);
+    }
+
+    /* Full-bleed POV background video */
+    .hero-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: 32% center; /* shift framing right so the left side isn't clipped */
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Dimming scrim — darker on the left (text side), clearer on the right */
+    .hero-video-scrim {
+      position: absolute; inset: 0; z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(270deg,
+          rgba(8,6,15,0.94) 0%,
+          rgba(8,6,15,0.80) 30%,
+          rgba(8,6,15,0.40) 62%,
+          rgba(8,6,15,0.30) 100%),
+        linear-gradient(180deg,
+          rgba(8,6,15,0.50) 0%,
+          rgba(8,6,15,0.12) 34%,
+          rgba(8,6,15,0.22) 68%,
+          rgba(8,6,15,0.85) 100%);
+    }
+    /* Subtle brand wash so the footage reads as "Vela" */
+    .hero-video-scrim::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(120% 90% at 88% 40%, rgba(107,90,224,0.18), transparent 55%);
+      mix-blend-mode: screen;
+      opacity: 0.6;
+    }
+
+    /* Content sits on the left, above the video + scrim */
+    .hero-content { position: relative; z-index: 3; max-width: 660px; }
+    .hero-content .hero-body { margin-left: 0; margin-right: 0; }
+    .hero-content .hero-actions { justify-content: flex-end; }
+
+    /* Keep the HUD framing + labels above the scrim */
+    .hero-corner, .hero-side-text, .hero-scroll { z-index: 2; }
+    .hero-corner { opacity: .14; }
+
+    @media (max-width: 768px) {
+      .hero { padding: 130px 24px 96px; }
+      .hero-content { max-width: 100%; }
+      .hero-video-scrim {
+        background: linear-gradient(180deg,
+          rgba(8,6,15,0.74) 0%,
+          rgba(8,6,15,0.45) 38%,
+          rgba(8,6,15,0.88) 100%);
+      }
+      .hero-video-scrim::after { opacity: .4; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-video { display: none; }
     }
 
     /* Large watermark text */
@@ -1988,23 +2049,13 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-watermark" aria-hidden="true">VELA</div>
+    <!-- Full-bleed POV background video -->
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/hero-3am.jpg" aria-hidden="true">
+      <source src="assets/hero-3am.mp4" type="video/mp4">
+    </video>
+    <div class="hero-video-scrim" aria-hidden="true"></div>
 
-    <!-- Ambient orbs -->
-    <div class="hero-orb hero-orb--1" aria-hidden="true"></div>
-    <div class="hero-orb hero-orb--2" aria-hidden="true"></div>
-    <div class="hero-orb hero-orb--3" aria-hidden="true"></div>
-
-    <!-- Horizontal lines -->
-    <div class="hero-line hero-line--1" aria-hidden="true"></div>
-    <div class="hero-line hero-line--2" aria-hidden="true"></div>
-
-    <!-- Rotating rings -->
-    <div class="hero-ring hero-ring--1" aria-hidden="true"></div>
-    <div class="hero-ring hero-ring--2" aria-hidden="true"></div>
-    <div class="hero-ring hero-ring--3" aria-hidden="true"></div>
-
-    <!-- Corner accents -->
+    <!-- Corner accents (viewfinder framing) -->
     <div class="hero-corner hero-corner--tl" aria-hidden="true"></div>
     <div class="hero-corner hero-corner--tr" aria-hidden="true"></div>
     <div class="hero-corner hero-corner--bl" aria-hidden="true"></div>
@@ -2014,35 +2065,24 @@
     <div class="hero-side-text hero-side-text--l" aria-hidden="true">Vela Vision &mdash; 2026</div>
     <div class="hero-side-text hero-side-text--r" aria-hidden="true">Memory Care Technology</div>
 
-    <!-- Floating dots -->
-    <div class="hero-dot hero-dot--1" aria-hidden="true"></div>
-    <div class="hero-dot hero-dot--2" aria-hidden="true"></div>
-    <div class="hero-dot hero-dot--3" aria-hidden="true"></div>
-    <div class="hero-dot hero-dot--4" aria-hidden="true"></div>
-    <div class="hero-dot hero-dot--5" aria-hidden="true"></div>
-    <div class="hero-dot hero-dot--6" aria-hidden="true"></div>
-    <div class="hero-dot hero-dot--7" aria-hidden="true"></div>
-    <div class="hero-dot hero-dot--8" aria-hidden="true"></div>
-    <div class="hero-dot hero-dot--9" aria-hidden="true"></div>
-    <div class="hero-dot hero-dot--10" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="hero-badge r"><span class="badge-dot"></span> Now accepting early access signups</div>
 
-    <div class="hero-badge r"><span class="badge-dot"></span> Now accepting early access signups</div>
+      <h1 class="r d1">Memory,<br><em>restored.</em></h1>
 
-    <h1 class="r d1">Memory,<br><em>restored.</em></h1>
+      <p class="hero-body r d2">She looks up at you, and her glasses quietly show your name — and that you're her daughter. The recognition comes back. So does the calm.</p>
 
-    <p class="hero-body r d2">She looks up at you, and her glasses quietly show your name — and that you're her daughter. The recognition comes back. So does the calm.</p>
-
-    <div class="hero-actions r d3">
-      <a href="#waitlist" class="btn-primary">
-        Join the Waitlist
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-      <a href="#how" class="btn-ghost">
-        How It Works
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
+      <div class="hero-actions r d3">
+        <a href="#waitlist" class="btn-primary">
+          Join the Waitlist
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#how" class="btn-ghost">
+          How It Works
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
     </div>
-
 
     <!-- Scroll indicator -->
     <div class="hero-scroll" aria-hidden="true">

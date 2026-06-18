@@ -1,0 +1,8 @@
+.git
+.claude
+.agents
+.DS_Store
+skills-lock.json
+README.md
+netlify.toml
+assets/og-image.svg

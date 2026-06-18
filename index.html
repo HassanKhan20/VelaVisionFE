@@ -3,13 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vela Vision — Faces Remembered. Connections Preserved.</title>
-  <meta name="description" content="Smart glasses that help dementia patients recognize the people around them. Showing names, relationships, and warm context in real time.">
+
+  <!-- ── Primary SEO ─────────────────────────────────── -->
+  <title>Vela Vision — Smart Glasses for Dementia & Memory Care</title>
+  <meta name="description" content="Vela Vision smart glasses help dementia patients recognize the people around them — showing names, relationships, and warm context in real time. Private, on-device, and built for memory care.">
+  <link rel="canonical" href="https://velavision.org/">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Vela Vision LLC">
+  <meta name="keywords" content="dementia smart glasses, memory care technology, face recognition glasses, Alzheimer's assistive technology, caregiver app, on-device AI glasses, Vela Vision">
+  <meta name="theme-color" content="#08060F">
+  <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <!-- ── Open Graph ──────────────────────────────────── -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Vela Vision">
+  <meta property="og:title" content="Vela Vision — Faces Remembered. Connections Preserved.">
+  <meta property="og:description" content="Smart glasses that help dementia patients recognize the people around them — showing names, relationships, and warm context in real time.">
+  <meta property="og:url" content="https://velavision.org/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://velavision.org/assets/og-image.png">
+  <meta property="og:image:secure_url" content="https://velavision.org/assets/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Vela Vision — smart glasses for memory care. Faces remembered, connections preserved.">
+
+  <!-- ── Twitter / X ─────────────────────────────────── -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vela Vision — Faces Remembered. Connections Preserved.">
+  <meta name="twitter:description" content="Smart glasses that help dementia patients recognize the people around them — showing names, relationships, and warm context in real time.">
+  <meta name="twitter:image" content="https://velavision.org/assets/og-image.png">
+  <meta name="twitter:image:alt" content="Vela Vision — smart glasses for memory care.">
+
+  <!-- ── Icons & manifest ────────────────────────────── -->
   <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+  <link rel="apple-touch-icon" href="assets/icon.svg">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- ── Resource hints & fonts ──────────────────────── -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com" crossorigin>
+  <link rel="dns-prefetch" href="https://script.google.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+
+  <!-- ── Structured data (JSON-LD) ───────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://velavision.org/#organization",
+        "name": "Vela Vision",
+        "legalName": "Vela Vision LLC",
+        "url": "https://velavision.org/",
+        "logo": "https://velavision.org/assets/logo-primary.svg",
+        "description": "Vela Vision builds smart glasses that help dementia patients recognize the people around them.",
+        "founder": [
+          { "@type": "Person", "name": "Aamir Khan", "jobTitle": "CEO" },
+          { "@type": "Person", "name": "Hassan Khan", "jobTitle": "CTO" },
+          { "@type": "Person", "name": "Haadi Siddiqui", "jobTitle": "COO" },
+          { "@type": "Person", "name": "Zayd Sayeed", "jobTitle": "CMO" }
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://velavision.org/#website",
+        "url": "https://velavision.org/",
+        "name": "Vela Vision",
+        "publisher": { "@id": "https://velavision.org/#organization" },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "Product",
+        "name": "Vela Vision Smart Glasses",
+        "image": "https://velavision.org/assets/og-image.png",
+        "description": "Smart glasses for memory care that quietly recognize familiar faces and display names, relationships, and warm context on-device, in real time.",
+        "brand": { "@id": "https://velavision.org/#organization" },
+        "category": "Assistive Technology",
+        "audience": { "@type": "PeopleAudience", "suggestedMinAge": 60 },
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/PreOrder",
+          "url": "https://velavision.org/#waitlist",
+          "priceCurrency": "USD",
+          "price": "0"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://velavision.org/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do Vela Vision glasses recognize faces?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The glasses passively scan for familiar faces and recognize them on-device in under two seconds — no buttons, no setup, and no cloud connection required."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my data private?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Recognition happens entirely on-device, so faces and personal context never leave the glasses or get sent to the cloud."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Who is Vela Vision for?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Vela Vision is built for people living with dementia or Alzheimer's and the caregivers and families who support them."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
   <style>
     :root {
       --violet: #6B5AE0;
@@ -1777,9 +1893,33 @@
       .b-card:hover { border-color: rgba(107,90,224,0.24); box-shadow: 0 16px 48px rgba(43,35,64,0.1); }
       footer { border-color: rgba(107,90,224,0.1); }
     }
+
+    /* ── ACCESSIBILITY ───────────────────────────────── */
+    .skip-link {
+      position: absolute; top: -100px; left: 16px; z-index: 1000;
+      padding: 10px 18px; border-radius: var(--r-btn);
+      background: var(--violet); color: #fff;
+      font-size: 13px; font-weight: 500; text-decoration: none;
+      transition: top .2s ease;
+    }
+    .skip-link:focus { top: 16px; }
+    :focus-visible { outline: 2px solid var(--lavender); outline-offset: 3px; border-radius: 4px; }
+
+    /* Honor user motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+      .r { opacity: 1 !important; transform: none !important; }
+    }
   </style>
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
 
   <div class="spotlight" id="spotlight"></div>
 
@@ -1799,6 +1939,8 @@
       <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </nav>
+
+  <main id="main">
 
   <!-- HERO -->
   <section class="hero">
@@ -1901,6 +2043,8 @@
         <model-viewer
           id="glassesModel"
           src="assets/plastic_sunglasses.glb"
+          alt="Interactive 3D model of the Vela Vision smart glasses"
+          loading="lazy"
           camera-controls
           disable-zoom
           disable-pan
@@ -2347,6 +2491,8 @@
       </a>
     </div>
   </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer>

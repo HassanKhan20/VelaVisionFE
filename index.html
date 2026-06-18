@@ -328,8 +328,11 @@
     .hero-corner { opacity: .14; }
 
     @media (max-width: 768px) {
-      .hero { padding: 130px 24px 96px; }
-      .hero-content { max-width: 100%; }
+      /* Left-align on mobile so the right-aligned hero content can't overflow off-screen */
+      .hero { padding: 130px 24px 96px; align-items: flex-start; text-align: left; }
+      .hero-content { max-width: 100%; width: 100%; align-self: stretch; }
+      .hero-content .hero-actions { justify-content: flex-start; }
+      .hero-badge { max-width: 100%; }
       .hero-video-scrim {
         background: linear-gradient(180deg,
           rgba(8,6,15,0.74) 0%,
@@ -340,7 +343,13 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+      /* Don't autoplay motion; fall back to the poster still as a static backdrop */
       .hero-video { display: none; }
+      .hero {
+        background-image: url('assets/hero-3am.jpg');
+        background-size: cover;
+        background-position: center;
+      }
     }
 
     /* Large watermark text */
@@ -2050,7 +2059,7 @@
   <!-- HERO -->
   <section class="hero">
     <!-- Full-bleed POV background video -->
-    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/hero-3am.jpg" aria-hidden="true">
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/hero-3am.jpg" aria-hidden="true">
       <source src="assets/hero-3am.mp4" type="video/mp4">
     </video>
     <div class="hero-video-scrim" aria-hidden="true"></div>
@@ -2617,9 +2626,7 @@
     <div class="footer-logo"><img src="assets/icon.svg" alt=""><span class="wm">Vela Vision</span></div>
     <ul class="footer-links">
       <li><a href="privacy/">Privacy</a></li>
-      <li><a href="#">Terms</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="#">Press</a></li>
       <li><a href="support/">Support</a></li>
     </ul>
     <div class="footer-copy">&copy; 2026 Vela Vision LLC</div>

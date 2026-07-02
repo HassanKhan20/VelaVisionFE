@@ -177,7 +177,10 @@
       font-size: 16px; color: var(--muted); max-width: 480px;
       margin: 0 auto 40px; line-height: 1.7;
     }
-    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .hero-btns { display: flex; gap: 12px; justify-content: center; align-items: center; flex-wrap: wrap; }
+    .btn-appstore { display: inline-flex; text-decoration: none; transition: transform .3s; }
+    .btn-appstore img { display: block; height: 48px; width: auto; }
+    .btn-appstore:hover { transform: translateY(-1px); }
     .btn-primary {
       font-weight: 500; font-size: 13px; color: var(--sand);
       background: var(--violet); border: none; border-radius: var(--r-btn);
@@ -889,7 +892,7 @@
       <h1 class="r d1">Care that fits in<br>your <em>pocket.</em></h1>
       <p class="hero-sub r d2">Everything a caregiver needs — your patient's full day, their care team, and instant alerts — in one place.</p>
       <div class="hero-btns r d3">
-        <a href="../#waitlist" class="btn-primary">Get Early Access</a>
+        <a href="https://apps.apple.com/app/id6767374702" class="btn-appstore" aria-label="Download Vela Vision on the App Store"><img src="../assets/appstore-badge.svg" alt="Download on the App Store" height="48"></a>
         <a href="#features" class="btn-ghost">See Features</a>
       </div>
     </div>

@@ -5,494 +5,389 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Support — Vela Vision</title>
   <meta name="description" content="Get help with Vela Vision. Find answers to common questions or reach out directly.">
+  <meta name="theme-color" content="#171226">
   <link rel="icon" type="image/svg+xml" href="../assets/icon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,340;0,9..144,400;1,9..144,300&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --violet: #6B5AE0;
+      --violet-deep: #4F40B8;
       --lavender: #A695F5;
       --sand: #F5F0E8;
-      --deep-plum: #2B2340;
+      --sand-mid: #E8E0D4;
+      --cream: #EFE6D7;
       --warm-white: #FAF8F4;
-      --muted: #8B7FA8;
-      --mid-plum: #3D3560;
-      --v700: #4F40B8;
-      --bg: #08060F;
+      --plum: #2B2340;
+      --plum-mid: #3D3560;
+      --night: #171226;
+      --night-soft: #211A36;
+      --ink: #2B2340;
+      --ink-soft: #5C5476;
+      --ink-faint: #8B7FA8;
+      --line: #E3DACB;
+      --line-night: rgba(166,149,245,0.14);
+
+      --serif: 'Fraunces', Georgia, serif;
+      --sans: 'Inter', -apple-system, sans-serif;
+      --mono: 'IBM Plex Mono', ui-monospace, monospace;
+
       --r-card: 12px;
       --r-btn: 8px;
       --r-pill: 999px;
+
+      --pad-x: clamp(24px, 6vw, 72px);
+      --measure: 1160px;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
     body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--warm-white);
-      overflow-x: hidden;
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      background: var(--sand);
+      color: var(--ink);
       -webkit-font-smoothing: antialiased;
-      cursor: default;
     }
 
-    /* ── NOISE GRAIN ───────────────────────────── */
-    body::after {
-      content: '';
-      position: fixed; inset: 0; z-index: 9999;
-      pointer-events: none;
-      opacity: 0.035;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size: 128px;
+    ::selection { background: rgba(107,90,224,0.18); }
+
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--violet);
+      outline-offset: 3px;
+      border-radius: 2px;
     }
 
-    /* ── SPOTLIGHT ─────────────────────────────── */
-    .spotlight {
-      position: fixed; inset: 0; z-index: 0;
-      pointer-events: none;
-      background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(107,90,224,0.07), transparent 60%);
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      display: block;
+      margin-bottom: 20px;
     }
 
-    /* ── REVEAL ────────────────────────────────── */
-    .r { opacity: 0; transform: translateY(50px); transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1); }
-    .r.v { opacity: 1; transform: translateY(0); }
-    .d1 { transition-delay: .1s } .d2 { transition-delay: .2s }
-    .d3 { transition-delay: .3s } .d4 { transition-delay: .4s }
-    .d5 { transition-delay: .5s }
+    .r { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+    .r.v { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .r { opacity: 1; transform: none; transition: none; }
+    }
 
-    /* ── NAV ───────────────────────────────────── */
+    /* ── NAV ─────────────────────────────────────────── */
     nav {
-      position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+      position: fixed; top: 0; left: 0; right: 0;
       z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 8px 0 24px; height: 56px;
-      width: min(90%, 1060px);
-      background: rgba(8,6,15,0.5);
-      backdrop-filter: blur(40px) saturate(1.4);
-      -webkit-backdrop-filter: blur(40px) saturate(1.4);
-      border: 1px solid rgba(166,149,245,0.06);
-      border-radius: 16px;
-      transition: all .5s cubic-bezier(.16,1,.3,1);
+      gap: 24px;
+      padding: 0 var(--pad-x);
+      height: 68px;
+      transition: background .35s ease, border-color .35s ease;
+      border-bottom: 1px solid transparent;
     }
-    nav.scrolled {
-      top: 12px;
-      background: rgba(8,6,15,0.88);
-      border-color: rgba(166,149,245,0.12);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(166,149,245,0.04);
+    nav.light {
+      background: rgba(245,240,232,0.92);
+      border-bottom-color: var(--line);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
-    .nav-logo {
-      text-decoration: none; display: flex; align-items: center; gap: 10px;
-      line-height: 1; transition: opacity .2s;
-    }
-    .nav-logo img { display: block; height: 30px; width: auto; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 28px; width: auto; display: block; }
+    .nav-logo img.logo-plum { display: none; }
+    nav.light .nav-logo img.logo-lav { display: none; }
+    nav.light .nav-logo img.logo-plum { display: block; }
     .nav-logo .wm {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 500; font-size: 24px;
-      color: var(--sand); letter-spacing: 0.5px;
+      font-family: var(--serif); font-weight: 400; font-size: 20px;
+      color: var(--warm-white); letter-spacing: 0.01em;
+      transition: color .35s ease;
     }
-    .nav-logo:hover { opacity: .85; }
-    .nav-links {
-      display: flex; align-items: center; gap: 2px; list-style: none;
-      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-    }
+    nav.light .nav-logo .wm { color: var(--ink); }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
     .nav-links a {
-      font-size: 13px; font-weight: 500;
-      color: var(--muted); text-decoration: none;
-      padding: 8px 16px; border-radius: var(--r-btn);
-      transition: all .25s; position: relative;
-    }
-    .nav-links a::after {
-      content: ''; position: absolute;
-      bottom: 4px; left: 50%; transform: translateX(-50%);
-      width: 0; height: 1.5px;
-      background: var(--lavender); border-radius: 1px;
-      transition: width .25s;
+      font-size: 13.5px; font-weight: 500;
+      color: rgba(250,248,244,0.75); text-decoration: none;
+      padding: 8px 13px; border-radius: var(--r-btn);
+      transition: color .2s;
     }
     .nav-links a:hover { color: var(--warm-white); }
-    .nav-links a:hover::after { width: 16px; }
-    .nav-links a.active { color: var(--warm-white); }
-    .nav-links a.active::after { width: 16px; }
+    nav.light .nav-links a { color: var(--ink-soft); }
+    nav.light .nav-links a:hover { color: var(--ink); }
     .nav-cta {
-      font-weight: 500; font-size: 12px;
-      color: var(--sand); background: var(--violet);
-      border: none; border-radius: var(--r-btn);
-      padding: 10px 22px; cursor: pointer; text-decoration: none;
-      transition: all .3s; white-space: nowrap;
-      position: relative; overflow: hidden;
-    }
-    .nav-cta::before {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
-      opacity: 0; transition: opacity .3s;
-    }
-    .nav-cta:hover { background: var(--v700); box-shadow: 0 4px 20px rgba(107,90,224,0.4); transform: translateY(-1px); }
-    .nav-cta:hover::before { opacity: 1; }
-
-    /* ── UTILITY ───────────────────────────────── */
-    section { position: relative; z-index: 1; }
-    .eyebrow {
-      font-weight: 500; font-size: 10px;
-      letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--lavender);
-      display: inline-flex; align-items: center; gap: 10px;
-    }
-    .eyebrow::before {
-      content: ''; width: 28px; height: 1.5px;
-      background: linear-gradient(90deg, var(--violet), var(--lavender));
-      border-radius: 1px;
-    }
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(166,149,245,0.1), transparent);
-      position: relative; z-index: 1;
-    }
-
-    /* ── AMBIENT ORBS ──────────────────────────── */
-    .orb {
-      position: absolute; border-radius: 50%;
-      pointer-events: none; filter: blur(100px);
-    }
-
-    /* ── HERO ──────────────────────────────────── */
-    .hero {
-      min-height: 60vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      padding: 160px 48px 80px;
-      position: relative; overflow: hidden;
-    }
-
-    .hero-watermark {
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300; font-size: clamp(160px, 22vw, 360px);
-      color: rgba(107,90,224,0.03);
-      white-space: nowrap; pointer-events: none; user-select: none;
-      letter-spacing: -0.04em;
-    }
-
-    .hero-corner {
-      position: absolute; width: 60px; height: 60px;
-      pointer-events: none; opacity: .06;
-    }
-    .hero-corner--tl { top: 80px; left: 48px; border-top: 1px solid var(--lavender); border-left: 1px solid var(--lavender); }
-    .hero-corner--tr { top: 80px; right: 48px; border-top: 1px solid var(--lavender); border-right: 1px solid var(--lavender); }
-    .hero-corner--bl { bottom: 40px; left: 48px; border-bottom: 1px solid var(--lavender); border-left: 1px solid var(--lavender); }
-    .hero-corner--br { bottom: 40px; right: 48px; border-bottom: 1px solid var(--lavender); border-right: 1px solid var(--lavender); }
-
-    .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300; font-size: clamp(52px, 7vw, 96px);
-      line-height: 0.9; letter-spacing: -0.03em;
-      margin-bottom: 24px;
-    }
-    .hero h1 em {
-      font-style: italic;
-      background: linear-gradient(135deg, var(--lavender), #D4CEFF, var(--violet));
-      background-size: 200% 200%;
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: gradShift 6s ease-in-out infinite;
-    }
-    @keyframes gradShift {
-      0%,100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-    .hero-body {
-      font-size: 16px; line-height: 1.75;
-      color: var(--muted); max-width: 440px; margin: 0 auto;
-    }
-
-    /* ── FAQ ───────────────────────────────────── */
-    .faq {
-      padding: 80px 48px 100px;
-    }
-    .faq-inner { max-width: 760px; margin: 0 auto; }
-    .faq-header { text-align: center; margin-bottom: 56px; }
-    .faq-header .eyebrow { margin-bottom: 16px; }
-    .faq-header h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300; font-size: clamp(32px, 4vw, 52px);
-      color: var(--warm-white); line-height: 1.1;
-    }
-
-    .faq-item {
-      border: 1px solid rgba(166,149,245,0.1);
-      border-radius: 14px;
-      padding: 28px 32px;
-      margin-bottom: 12px;
-      background: rgba(107,90,224,0.04);
-      transition: border-color .3s, background .3s, box-shadow .3s;
-      cursor: default;
-    }
-    .faq-item:hover {
-      border-color: rgba(166,149,245,0.22);
-      background: rgba(107,90,224,0.08);
-      box-shadow: 0 8px 40px rgba(107,90,224,0.08);
-    }
-    .faq-q {
-      font-size: 15px; font-weight: 500;
+      font-weight: 500; font-size: 13.5px;
       color: var(--warm-white);
-      margin-bottom: 12px;
-      display: flex; align-items: flex-start; gap: 14px;
+      background: var(--violet);
+      border: none; border-radius: var(--r-btn);
+      padding: 10px 20px; cursor: pointer; text-decoration: none;
+      transition: background .2s;
+      white-space: nowrap;
     }
-    .faq-q-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400; font-size: 18px;
-      color: var(--lavender); opacity: .5;
-      flex-shrink: 0; line-height: 1.3;
+    .nav-cta:hover { background: var(--violet-deep); }
+    .nav-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 10px; }
+    .nav-menu-btn svg { width: 22px; height: 22px; stroke: var(--warm-white); fill: none; stroke-width: 2; stroke-linecap: round; display: block; }
+    nav.light .nav-menu-btn svg { stroke: var(--ink); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed; top: 68px; left: 0; right: 0;
+      z-index: 199;
+      background: var(--warm-white);
+      border-bottom: 1px solid var(--line);
+      padding: 12px var(--pad-x) 24px;
     }
-    .faq-a {
-      font-size: 14px; line-height: 1.75;
-      color: var(--muted);
-      padding-left: 32px;
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block;
+      font-size: 16px; font-weight: 500;
+      color: var(--ink); text-decoration: none;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
     }
-    .faq-a a {
-      color: var(--lavender); text-decoration: none;
-      border-bottom: 1px dotted rgba(166,149,245,0.35);
+    .mobile-menu a:last-child { border-bottom: none; }
+
+    /* ── PAGE HERO (compact night band) ──────────────── */
+    .page-hero {
+      background: var(--night);
+      color: var(--warm-white);
+      padding: 150px var(--pad-x) 76px;
+    }
+    .page-hero-inner { max-width: var(--measure); margin: 0 auto; }
+    .page-hero .eyebrow { color: var(--lavender); }
+    .page-hero h1 {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(40px, 5.5vw, 72px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      max-width: 680px;
+    }
+    .page-hero .lede {
+      margin-top: 20px;
+      font-size: 16.5px; line-height: 1.7;
+      color: rgba(250,248,244,0.78);
+      max-width: 520px;
+    }
+
+    /* ── Section scaffolding ─────────────────────────── */
+    .section { padding: clamp(88px, 11vw, 150px) var(--pad-x); }
+    .section-inner { max-width: var(--measure); margin: 0 auto; }
+    .section-head { max-width: 620px; margin-bottom: clamp(48px, 6vw, 80px); }
+    .section-head h2 {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(34px, 4.2vw, 56px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .section-head .lede {
+      margin-top: 20px;
+      font-size: 16.5px; line-height: 1.7;
+      color: var(--ink-soft);
+      max-width: 540px;
+    }
+
+    /* ── FAQ ─────────────────────────────────────────── */
+    .faq { background: var(--warm-white); border-bottom: 1px solid var(--line); }
+    .faq-list { border-top: 1px solid var(--line); }
+    .faq-item {
+      display: grid; grid-template-columns: minmax(220px, 1fr) 2fr;
+      gap: 32px;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .faq-item h3 { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.4; }
+    .faq-item p { font-size: 15px; line-height: 1.75; color: var(--ink-soft); max-width: 560px; }
+    .faq-item p strong { color: var(--ink); font-weight: 600; }
+
+    /* ── CONTACT ─────────────────────────────────────── */
+    .contact-inner { max-width: var(--measure); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .contact-inner h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(30px, 3.5vw, 44px); letter-spacing: -0.02em; line-height: 1.1; }
+    .contact-body { margin-top: 16px; font-size: 15px; line-height: 1.7; color: var(--ink-soft); max-width: 400px; }
+    .contact-note { margin-top: 16px; font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.04em; color: var(--ink-faint); }
+    .contact-email {
+      justify-self: end;
+      font-family: var(--mono); font-size: 16px;
+      color: var(--ink); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 12px;
+      border-bottom: 1px solid var(--ink-faint);
+      padding-bottom: 6px;
       transition: color .2s, border-color .2s;
     }
-    .faq-a a:hover { color: var(--warm-white); border-color: var(--warm-white); }
+    .contact-email:hover { color: var(--violet-deep); border-color: var(--violet-deep); }
+    .contact-email svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
 
-    /* ── CONTACT ───────────────────────────────── */
-    .contact {
-      padding: 60px 48px 160px;
-      text-align: center; position: relative; z-index: 1;
-    }
-    .contact-inner { max-width: 600px; margin: 0 auto; }
-    .contact h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300; font-size: clamp(40px, 5.5vw, 64px);
-      color: var(--warm-white); line-height: 1.1; margin-bottom: 18px;
-    }
-    .contact h2 em { font-style: italic; color: var(--lavender); }
-    .contact-body {
-      font-size: 15px; color: var(--muted);
-      line-height: 1.7; margin-bottom: 44px;
-    }
-    .contact-email {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 18px 36px;
-      border: 1px solid rgba(166,149,245,0.2);
-      border-radius: 100px;
-      background: rgba(107,90,224,0.06);
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      color: var(--lavender);
-      font-size: 16px; font-weight: 500; text-decoration: none;
-      letter-spacing: .01em;
-      transition: background .25s, border-color .25s, box-shadow .25s, transform .2s;
-    }
-    .contact-email:hover {
-      background: rgba(107,90,224,0.14);
-      border-color: rgba(166,149,245,0.4);
-      box-shadow: 0 8px 32px rgba(107,90,224,0.25);
-      transform: translateY(-2px);
-    }
-    .contact-email svg {
-      width: 18px; height: 18px; stroke: currentColor;
-      fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
-    }
-    .response-note {
-      font-size: 12px; color: var(--muted); opacity: .5;
-      margin-top: 18px; letter-spacing: .02em;
-    }
-
-    /* ── FOOTER ────────────────────────────────── */
+    /* ── FOOTER ──────────────────────────────────────── */
     footer {
-      padding: 44px 48px;
-      display: flex; align-items: center; justify-content: space-between;
-      position: relative; z-index: 1;
-      border-top: 1px solid rgba(166,149,245,0.06);
+      background: var(--night);
+      color: rgba(250,248,244,0.7);
+      padding: 48px var(--pad-x);
     }
-    .footer-logo { display: flex; align-items: center; gap: 8px; }
-    .footer-logo img { display: block; height: 26px; width: auto; }
-    .footer-logo .wm {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 500; font-size: 20px;
-      color: var(--sand); letter-spacing: 0.5px;
+    .footer-inner {
+      max-width: var(--measure); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
     }
+    .footer-logo { display: flex; align-items: center; gap: 9px; }
+    .footer-logo img { height: 24px; width: auto; display: block; }
+    .footer-logo .wm { font-family: var(--serif); font-weight: 400; font-size: 18px; color: var(--sand); }
     .footer-links { display: flex; gap: 28px; list-style: none; }
-    .footer-links a {
-      font-size: 12px; font-weight: 500;
-      color: var(--muted); text-decoration: none; transition: color .2s;
-    }
-    .footer-links a:hover, .footer-links a.active { color: var(--warm-white); }
-    .footer-copy { font-size: 11px; color: var(--muted); opacity: .4; }
+    .footer-links a { font-size: 13.5px; color: rgba(250,248,244,0.7); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--warm-white); }
+    .footer-copy { font-family: var(--mono); font-size: 12px; color: rgba(250,248,244,0.45); }
 
-    /* ── RESPONSIVE ────────────────────────────── */
+    /* ── RESPONSIVE ──────────────────────────────────── */
     @media (max-width: 768px) {
-      nav { padding: 0 16px; width: calc(100% - 20px); }
       .nav-links { display: none; }
-      .hero { padding: 120px 24px 60px; }
-      .faq { padding: 60px 24px 80px; }
-      .faq-item { padding: 22px 20px; }
-      .contact { padding: 40px 24px 100px; }
-      footer { flex-direction: column; gap: 18px; text-align: center; padding: 28px 24px; }
-      .footer-links { flex-wrap: wrap; justify-content: center; }
-    }
-
-    /* ── LIGHT MODE ──────────────────────────── */
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #F5F1EB;
-        --warm-white: #1A1428;
-        --muted: #6B5F7A;
-        --sand: #2B2340;
-      }
-      body::after { opacity: .018; }
-      nav { background: rgba(245,241,235,0.55); border-color: rgba(107,90,224,0.1); }
-      nav.scrolled { background: rgba(245,241,235,0.94); border-color: rgba(107,90,224,0.16); box-shadow: 0 8px 32px rgba(43,35,64,0.08); }
-      .hero-watermark { color: rgba(107,90,224,0.04); }
-      .hero-corner { opacity: .12; }
-      .divider { background: linear-gradient(90deg, transparent, rgba(107,90,224,0.14), transparent); }
-      .faq-item { background: rgba(255,255,255,0.72); border-color: rgba(107,90,224,0.1); }
-      .faq-item:hover { background: rgba(255,255,255,0.92); border-color: rgba(107,90,224,0.22); box-shadow: 0 8px 40px rgba(43,35,64,0.08); }
-      .faq-q { color: #1A1428; }
-      .faq-a { color: #6B5F7A; }
-      .faq-a a:hover { color: #1A1428; border-color: #1A1428; }
-      .contact-email { background: rgba(107,90,224,0.07); }
-      footer { border-color: rgba(107,90,224,0.1); }
+      .nav-menu-btn { display: block; }
+      .faq-item { grid-template-columns: 1fr; gap: 12px; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .contact-email { justify-self: start; }
     }
   </style>
 </head>
 <body>
 
-  <div class="spotlight" id="spotlight"></div>
-
   <!-- NAV -->
   <nav id="nav">
     <a href="../" class="nav-logo">
-      <img src="../assets/icon.svg" alt="">
+      <img class="logo-lav" src="../assets/VelaVision_Icon_Lavender.svg" alt="">
+      <img class="logo-plum" src="../assets/VelaVision_Icon_Plum.svg" alt="">
       <span class="wm">Vela Vision</span>
     </a>
     <ul class="nav-links">
       <li><a href="../#how">How It Works</a></li>
-      <li><a href="../#app">App</a></li>
+      <li><a href="../#trust">Trust</a></li>
+      <li><a href="../app/">App</a></li>
       <li><a href="../#team">Team</a></li>
       <li><a href="../#contact">Contact</a></li>
-      <li><a href="../support/" class="active">Support</a></li>
+      <li><a href="./">Support</a></li>
+      <li><a href="../privacy/">Privacy</a></li>
     </ul>
     <a href="../#waitlist" class="nav-cta">Join Waitlist</a>
+    <button class="nav-menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
   </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="../#how">How It Works</a>
+    <a href="../#trust">Trust</a>
+    <a href="../app/">App</a>
+    <a href="../#team">Team</a>
+    <a href="../#contact">Contact</a>
+    <a href="./">Support</a>
+    <a href="../privacy/">Privacy</a>
+    <a href="../#waitlist">Join Waitlist</a>
+  </div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-watermark" aria-hidden="true">SUPPORT</div>
+  <main id="main">
 
-    <!-- Ambient orbs -->
-    <div class="orb" style="width:500px;height:500px;background:var(--violet);top:-20%;right:-10%;opacity:.08;animation:drift1 18s ease-in-out infinite;" aria-hidden="true"></div>
-    <div class="orb" style="width:350px;height:350px;background:var(--lavender);bottom:-15%;left:-8%;opacity:.05;animation:drift2 22s ease-in-out infinite;" aria-hidden="true"></div>
-
-    <!-- Corner accents -->
-    <div class="hero-corner hero-corner--tl" aria-hidden="true"></div>
-    <div class="hero-corner hero-corner--tr" aria-hidden="true"></div>
-    <div class="hero-corner hero-corner--bl" aria-hidden="true"></div>
-    <div class="hero-corner hero-corner--br" aria-hidden="true"></div>
-
-    <p class="eyebrow r">Support</p>
-    <h1 class="r d1">We're here<br>to <em>help.</em></h1>
-    <p class="hero-body r d2">Find answers to common questions, or reach out directly. We respond within 24 hours.</p>
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <span class="eyebrow r">Support</span>
+      <h1 class="r">We're here to help.</h1>
+      <p class="lede r">Find answers to common questions, or reach out directly. We respond within 24 hours.</p>
+    </div>
   </section>
 
-  <div class="divider"></div>
-
   <!-- FAQ -->
-  <section class="faq">
-    <div class="faq-inner">
-      <div class="faq-header">
-        <p class="eyebrow r">Common Questions</p>
-        <h2 class="r d1">Quick answers</h2>
+  <section class="section faq">
+    <div class="section-inner">
+      <div class="section-head r">
+        <span class="eyebrow">Common Questions</span>
+        <h2>Quick answers.</h2>
       </div>
-
-      <div class="faq-item r d1">
-        <div class="faq-q"><span class="faq-q-num">01</span> How do I link a patient to my caregiver account?</div>
-        <div class="faq-a">Open the side menu by tapping the Vela Vision logo at the top of the app, then tap <strong>Link Code</strong>. Share the 8-character code with your patient — they enter it in their app under the same menu. Once confirmed, you'll see their data on your dashboard.</div>
-      </div>
-
-      <div class="faq-item r d2">
-        <div class="faq-q"><span class="faq-q-num">02</span> How do I add family members or other caregivers?</div>
-        <div class="faq-a">Go to the <strong>Care Team</strong> tab and tap <strong>Invite</strong>. Enter their email address and choose their role (family member or paid aide). They'll receive a link — once they download the app and sign up, they're automatically added to the care team. Inviting others requires a Starter or Unlimited plan.</div>
-      </div>
-
-      <div class="faq-item r d3">
-        <div class="faq-q"><span class="faq-q-num">03</span> Why isn't my data loading?</div>
-        <div class="faq-a">Our server may be waking up after a period of inactivity (we're on a free hosting tier — first load can take ~30 seconds). Pull down to refresh and wait a moment. If the issue persists, try signing out and back in.</div>
-      </div>
-
-      <div class="faq-item r d4">
-        <div class="faq-q"><span class="faq-q-num">04</span> What subscription plans are available?</div>
-        <div class="faq-a">We offer two paid plans: <strong>Starter</strong> ($9.99/mo) which includes up to 2 care team seats, and <strong>Unlimited</strong> ($14.99/mo) with unlimited seats and premium features. A free tier is available with limited functionality. You can upgrade anytime from the app.</div>
-      </div>
-
-      <div class="faq-item r d5">
-        <div class="faq-q"><span class="faq-q-num">05</span> How do I cancel or manage my subscription?</div>
-        <div class="faq-a">Subscriptions are managed through the App Store. Go to <strong>Settings → Apple ID → Subscriptions</strong> on your iPhone, find Vela Vision, and tap <strong>Cancel Subscription</strong> to cancel or change your plan. Changes take effect at the end of your billing period.</div>
+      <div class="faq-list r">
+        <div class="faq-item">
+          <h3>How do I link a patient to my caregiver account?</h3>
+          <p>Open the side menu by tapping the Vela Vision logo at the top of the app, then tap <strong>Link Code</strong>. Share the 8-character code with your patient — they enter it in their app under the same menu. Once confirmed, you'll see their data on your dashboard.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do I add family members or other caregivers?</h3>
+          <p>Go to the <strong>Care Team</strong> tab and tap <strong>Invite</strong>. Enter their email address and choose their role (family member or paid aide). They'll receive a link — once they download the app and sign up, they're automatically added to the care team. Inviting others requires a Starter or Unlimited plan.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Why isn't my data loading?</h3>
+          <p>Our server may be waking up after a period of inactivity (we're on a free hosting tier — first load can take ~30 seconds). Pull down to refresh and wait a moment. If the issue persists, try signing out and back in.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What subscription plans are available?</h3>
+          <p>We offer two paid plans: <strong>Starter</strong> ($9.99/mo) which includes up to 2 care team seats, and <strong>Unlimited</strong> ($14.99/mo) with unlimited seats and premium features. A free tier is available with limited functionality. You can upgrade anytime from the app.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do I cancel or manage my subscription?</h3>
+          <p>Subscriptions are managed through the App Store. Go to <strong>Settings → Apple ID → Subscriptions</strong> on your iPhone, find Vela Vision, and tap <strong>Cancel Subscription</strong> to cancel or change your plan. Changes take effect at the end of your billing period.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="divider"></div>
-
   <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <div class="orb" style="width:400px;height:400px;background:var(--violet);top:50%;left:50%;transform:translate(-50%,-50%);opacity:.05;" aria-hidden="true"></div>
+  <section class="section" id="contact">
     <div class="contact-inner">
-      <p class="eyebrow r">Contact</p>
-      <h2 class="r d1">Still need<br><em>help?</em></h2>
-      <p class="contact-body r d2">Send us a message and we'll get back to you as soon as possible. We're a small team and we read every email.</p>
-      <a href="mailto:founder@velavision.org" class="contact-email r d3">
+      <div class="r">
+        <span class="eyebrow">Contact</span>
+        <h2>Still need help?</h2>
+        <p class="contact-body">Send us a message and we'll get back to you as soon as possible. We're a small team and we read every email.</p>
+        <p class="contact-note">We typically respond within 24 hours.</p>
+      </div>
+      <a href="mailto:founder@velavision.org" class="contact-email r">
         <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
         founder@velavision.org
       </a>
-      <p class="response-note r d4">We typically respond within 24 hours.</p>
     </div>
   </section>
 
+  </main>
+
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">
-      <img src="../assets/icon.svg" alt="">
-      <span class="wm">Vela Vision</span>
+    <div class="footer-inner">
+      <div class="footer-logo"><img src="../assets/VelaVision_Icon_Lavender.svg" alt=""><span class="wm">Vela Vision</span></div>
+      <ul class="footer-links">
+        <li><a href="../privacy/">Privacy</a></li>
+        <li><a href="../#contact">Contact</a></li>
+        <li><a href="./">Support</a></li>
+      </ul>
+      <div class="footer-copy">&copy; 2026 Vela Vision LLC</div>
     </div>
-    <ul class="footer-links">
-      <li><a href="#">Privacy</a></li>
-      <li><a href="#">Terms</a></li>
-      <li><a href="../#contact">Contact</a></li>
-      <li><a href="../support/" class="active">Support</a></li>
-    </ul>
-    <div class="footer-copy">&copy; 2026 Vela Vision LLC</div>
   </footer>
 
   <script>
-    // ── Mouse spotlight
-    document.addEventListener('mousemove', e => {
-      document.getElementById('spotlight').style.setProperty('--mx', e.clientX + 'px');
-      document.getElementById('spotlight').style.setProperty('--my', e.clientY + 'px');
+    // Nav: dark over the night band, light after
+    var nav = document.getElementById('nav');
+    var band = document.querySelector('.page-hero');
+    function onScroll() {
+      nav.classList.toggle('light', window.scrollY > (band.offsetHeight - 90));
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Mobile menu
+    var menuBtn = document.getElementById('menuBtn');
+    var mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', function() {
+      var open = mobileMenu.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open);
+    });
+    mobileMenu.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        mobileMenu.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
     });
 
-    // ── Nav scroll
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', scrollY > 40);
-    }, { passive: true });
-
-    // ── Reveal on scroll
-    const revealEls = document.querySelectorAll('.r');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('v'); observer.unobserve(e.target); } });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    revealEls.forEach(el => observer.observe(el));
-
-    // ── Orb drift animations
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes drift1 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-25px,18px); } }
-      @keyframes drift2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(20px,-14px); } }
-    `;
-    document.head.appendChild(style);
+    // Scroll reveals — subtle, once
+    var ro = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('v'); ro.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -20px 0px' });
+    document.querySelectorAll('.r').forEach(function(el) { ro.observe(el); });
   </script>
 </body>
 </html>

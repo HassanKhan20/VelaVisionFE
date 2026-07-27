@@ -3,9 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The App — Vela Vision</title>
-  <meta name="description" content="Vela Vision for caregivers. Track your patient's entire day, coordinate your care team, and never miss what matters.">
+  <title>The Vela App — Care for a Parent With Dementia</title>
+  <meta name="description" content="Vela helps you track your parent's whole day, coordinate your care team, and know the moment something changes.">
   <meta name="theme-color" content="#171226">
+
+  <!-- ── Open Graph / social preview (caregiver app, not glasses) ── -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Vela Vision">
+  <meta property="og:title" content="Care for a parent with dementia?">
+  <meta property="og:description" content="Vela helps you track their whole day, coordinate your care team, and know the moment something changes.">
+  <meta property="og:url" content="https://velavision.org/app/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://velavision.org/assets/og-app.png">
+  <meta property="og:image:secure_url" content="https://velavision.org/assets/og-app.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Vela app for dementia caregivers.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Care for a parent with dementia?">
+  <meta name="twitter:description" content="Vela helps you track their whole day, coordinate your care team, and know the moment something changes.">
+  <meta name="twitter:image" content="https://velavision.org/assets/og-app.png">
+  <meta name="twitter:image:alt" content="The Vela app for dementia caregivers.">
   <link rel="icon" type="image/svg+xml" href="../assets/icon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -558,7 +577,53 @@
       .feature-visual { padding: 0; }
       .cta-actions { align-items: flex-start; }
     }
+
+    /* ── Waitlist form ── */
+    .wl-segment { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 18px; }
+    .wl-segment-label { font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: var(--ink-faint); margin-right: 4px; }
+    .wl-chip {
+      position: relative; font-size: 14px; color: var(--ink);
+      background: var(--warm-white); border: 1px solid var(--line);
+      border-radius: 999px; padding: 8px 16px; cursor: pointer; transition: all .15s;
+    }
+    .wl-chip:hover { border-color: var(--ink-faint); }
+    .wl-chip input { position: absolute; opacity: 0; pointer-events: none; }
+    .wl-chip:has(input:checked) { background: var(--plum); color: var(--warm-white); border-color: var(--plum); }
+    .wl-chip:has(input:focus-visible) { outline: 2px solid var(--violet); outline-offset: 2px; }
+    .wl-form { display: flex; gap: 10px; max-width: 480px; }
+    .wl-input {
+      flex: 1; font-family: var(--sans); font-size: 15px; color: var(--ink);
+      background: var(--warm-white); border: 1px solid var(--line);
+      border-radius: var(--r-btn); padding: 14px 18px;
+    }
+    .wl-input::placeholder { color: var(--ink-faint); }
+    .wl-input:focus { outline: 2px solid var(--violet); outline-offset: 0; border-color: var(--violet); }
+    .wl-btn {
+      font-family: var(--sans); font-weight: 500; font-size: 15px; color: var(--warm-white);
+      background: var(--violet); border: none; border-radius: var(--r-btn);
+      padding: 14px 26px; cursor: pointer; transition: background .2s; white-space: nowrap;
+    }
+    .wl-btn:hover { background: var(--violet-deep); }
+    .wl-btn:disabled { opacity: .6; cursor: default; }
+    .wl-success { display: none; font-size: 16px; font-weight: 500; color: var(--ink); padding: 14px 0; }
   </style>
+
+  <!-- ── Meta Pixel ──────────────────────────────────── -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1367767438753274');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1367767438753274&ev=PageView&noscript=1"
+  /></noscript>
 </head>
 <body>
 
@@ -578,7 +643,7 @@
       <li><a href="../support/">Support</a></li>
       <li><a href="../privacy/">Privacy</a></li>
     </ul>
-    <a href="../#waitlist" class="nav-cta">Join Waitlist</a>
+    <a href="#waitlist" class="nav-cta">Join Waitlist</a>
     <button class="nav-menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
       <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
@@ -591,7 +656,7 @@
     <a href="../#contact">Contact</a>
     <a href="../support/">Support</a>
     <a href="../privacy/">Privacy</a>
-    <a href="../#waitlist">Join Waitlist</a>
+    <a href="#waitlist">Join Waitlist</a>
   </div>
 
   <main id="main">
@@ -1007,7 +1072,7 @@
             <li class="plan-item off"><span class="plan-check">&ndash;</span>Care team invites</li>
             <li class="plan-item off"><span class="plan-check">&ndash;</span>Medication reminders</li>
           </ul>
-          <a href="../#waitlist" class="plan-cta plan-cta--ghost">Get Started</a>
+          <a href="#waitlist" class="plan-cta plan-cta--ghost">Get Started</a>
         </div>
         <!-- Starter -->
         <div class="plan plan--featured">
@@ -1022,7 +1087,7 @@
             <li class="plan-item"><span class="plan-check">&#10003;</span>Up to 2 care team seats</li>
             <li class="plan-item"><span class="plan-check">&#10003;</span>Medication reminders</li>
           </ul>
-          <a href="../#waitlist" class="plan-cta plan-cta--fill">Get Started</a>
+          <a href="#waitlist" class="plan-cta plan-cta--fill">Get Started</a>
         </div>
         <!-- Unlimited -->
         <div class="plan">
@@ -1036,23 +1101,30 @@
             <li class="plan-item"><span class="plan-check">&#10003;</span>Unlimited care team seats</li>
             <li class="plan-item"><span class="plan-check">&#10003;</span>Doctor report exports</li>
           </ul>
-          <a href="../#waitlist" class="plan-cta plan-cta--ghost">Get Started</a>
+          <a href="#waitlist" class="plan-cta plan-cta--ghost">Get Started</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CTA BAND -->
-  <section class="section cta-band">
+  <section id="waitlist" class="section cta-band">
     <div class="cta-inner">
       <span class="eyebrow r">Early Access</span>
       <h2 class="r">Ready to give care your full attention?</h2>
       <p class="cta-body r">Join the waitlist. Be the first to know when we launch.</p>
+      <div class="wl-segment r" role="radiogroup" aria-label="I am a">
+        <span class="wl-segment-label">I'm a</span>
+        <label class="wl-chip"><input type="radio" name="audience" value="Family caregiver" checked> Family caregiver</label>
+        <label class="wl-chip"><input type="radio" name="audience" value="Care facility"> Care facility</label>
+        <label class="wl-chip"><input type="radio" name="audience" value="Clinician / other"> Clinician / other</label>
+      </div>
+      <form class="wl-form r" id="wlForm" onsubmit="submitWL(event)">
+        <input type="email" class="wl-input" placeholder="your@email.com" aria-label="Email address" required>
+        <button type="submit" class="wl-btn">Join Waitlist</button>
+      </form>
+      <p class="wl-success" id="wlSuccess">You're on the list. We'll be in touch soon.</p>
       <div class="cta-actions r">
-        <a href="../#waitlist" class="btn-primary">
-          Join the Waitlist
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
         <a href="../support/" class="link-arrow dark">
           Have questions?
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1115,6 +1187,30 @@
         if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
       });
     });
+
+    // Waitlist form — posts to the same Google Sheet endpoint as the homepage
+    function submitWL(e) {
+      e.preventDefault();
+      var form = document.getElementById('wlForm');
+      var btn = form.querySelector('.wl-btn');
+      var email = form.querySelector('.wl-input').value;
+      var audienceEl = document.querySelector('input[name="audience"]:checked');
+      var audience = audienceEl ? audienceEl.value : '';
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+      fetch('https://script.google.com/macros/s/AKfycbxNfSkdyonzzW8z5VvOFUy_vPdJLmZw0Z4zN5SQGpiiM8AjgUjk9D3WOw9GwKDSR7FhCQ/exec', {
+        method: 'POST',
+        body: JSON.stringify({ email: email, audience: audience }),
+      }).then(function() {
+        form.style.display = 'none';
+        document.getElementById('wlSuccess').style.display = 'block';
+        if (typeof fbq === 'function') { fbq('track', 'Lead'); }
+      }).catch(function() {
+        btn.disabled = false;
+        btn.textContent = 'Join Waitlist';
+        alert('Something went wrong. Please try again.');
+      });
+    }
   </script>
 </body>
 </html>
